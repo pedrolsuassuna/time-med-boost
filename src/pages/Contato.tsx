@@ -35,25 +35,26 @@ const Contato = () => {
     <div className="min-h-screen">
       <Header />
 
-      <section className="pt-32 pb-20">
-        <div className="container-custom">
+      <section className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
+        <div className="container-custom px-4">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold mb-4">Entre em Contato</h1>
-              <p className="text-xl text-muted-foreground">
+            <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+              <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">Entre em Contato</h1>
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
                 Nossa equipe está pronta para ajudar
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div>
-                  <Label htmlFor="name">Nome Completo *</Label>
+                  <Label htmlFor="name" className="text-sm sm:text-base">Nome Completo *</Label>
                   <Input
                     id="name"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="text-sm sm:text-base"
                   />
                 </div>
                 <div>

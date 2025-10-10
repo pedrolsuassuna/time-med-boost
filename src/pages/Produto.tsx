@@ -130,31 +130,31 @@ const Produto = () => {
       <Header />
 
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-gradient-hero">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <Badge variant="secondary" className="text-sm px-4 py-2">
+      <section className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 bg-gradient-hero">
+        <div className="container-custom px-4">
+          <div className="max-w-4xl mx-auto text-center space-y-6 lg:space-y-8">
+            <Badge variant="secondary" className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">
               Produto
             </Badge>
-            <h1 className="hero-headline">
+            <h1 className="hero-headline text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               Plataforma completa de automação médica com IA
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground">
               Tudo que você precisa para eliminar papelada e focar no que importa:
               seus pacientes
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow text-lg"
+                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow text-base sm:text-lg w-full sm:w-auto"
                 asChild
               >
                 <Link to="/contato">
                   Solicitar Demo
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="text-lg" asChild>
+              <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto" asChild>
                 <Link to="/precos">Ver Preços</Link>
               </Button>
             </div>
@@ -163,51 +163,51 @@ const Produto = () => {
       </section>
 
       {/* Dashboard Preview */}
-      <section className="py-20 bg-background">
-        <div className="container-custom">
+      <section className="py-12 sm:py-16 lg:py-20 bg-background">
+        <div className="container-custom px-4">
           <div className="max-w-6xl mx-auto">
             <img
               src={dashboardMockup}
               alt="Interface do MindMed"
-              className="w-full rounded-2xl shadow-2xl border border-border"
+              className="w-full rounded-xl sm:rounded-2xl shadow-2xl border border-border"
             />
           </div>
         </div>
       </section>
 
       {/* Features */}
-      <section id="transcricao" className="section-padding bg-gradient-subtle">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="mb-4">Recursos Principais</h2>
-            <p className="text-xl text-muted-foreground">
+      <section id="transcricao" className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
+        <div className="container-custom px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+            <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl">Recursos Principais</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
               Tecnologia de ponta para automatizar cada etapa do seu atendimento
             </p>
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-12 lg:space-y-16">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`grid md:grid-cols-2 gap-12 items-center ${
+                className={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center ${
                   index % 2 === 1 ? "md:flex-row-reverse" : ""
                 }`}
               >
                 <div className={index % 2 === 1 ? "md:order-2" : ""}>
                   <Card className="card-premium">
-                    <div className="p-8 space-y-6">
-                      <div className="inline-flex w-16 h-16 rounded-full bg-secondary/10 items-center justify-center">
-                        <feature.icon className="w-8 h-8 text-secondary" />
+                    <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
+                      <div className="inline-flex w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-secondary/10 items-center justify-center">
+                        <feature.icon className="w-7 h-7 sm:w-8 sm:h-8 text-secondary" />
                       </div>
-                      <h3 className="text-2xl font-bold">{feature.title}</h3>
-                      <p className="text-lg text-muted-foreground">
+                      <h3 className="text-xl sm:text-2xl font-bold">{feature.title}</h3>
+                      <p className="text-base sm:text-lg text-muted-foreground">
                         {feature.description}
                       </p>
                       <ul className="space-y-3">
                         {feature.benefits.map((benefit, i) => (
                           <li key={i} className="flex items-start gap-3">
                             <CheckCircle2 className="w-5 h-5 text-success mt-0.5 flex-shrink-0" />
-                            <span>{benefit}</span>
+                            <span className="text-sm sm:text-base">{benefit}</span>
                           </li>
                         ))}
                       </ul>
@@ -215,8 +215,8 @@ const Produto = () => {
                   </Card>
                 </div>
                 <div className={index % 2 === 1 ? "md:order-1" : ""}>
-                  <div className="aspect-video bg-gradient-primary rounded-2xl flex items-center justify-center shadow-glow">
-                    <feature.icon className="w-24 h-24 text-primary-foreground opacity-50" />
+                  <div className="aspect-video bg-gradient-primary rounded-xl sm:rounded-2xl flex items-center justify-center shadow-glow">
+                    <feature.icon className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-primary-foreground opacity-50" />
                   </div>
                 </div>
               </div>

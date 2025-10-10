@@ -102,16 +102,16 @@ const Solucoes = () => {
       <Header />
 
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-gradient-hero">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <Badge variant="secondary" className="text-sm px-4 py-2">
+      <section className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 bg-gradient-hero">
+        <div className="container-custom px-4">
+          <div className="max-w-4xl mx-auto text-center space-y-6 lg:space-y-8">
+            <Badge variant="secondary" className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">
               Soluções
             </Badge>
-            <h1 className="hero-headline">
+            <h1 className="hero-headline text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               Uma solução perfeita para cada tipo de prática médica
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground">
               Do consultório individual às grandes redes hospitalares, temos o plano
               ideal para você
             </p>
@@ -230,24 +230,24 @@ const Solucoes = () => {
       </section>
 
       {/* Comparison */}
-      <section className="section-padding bg-gradient-subtle">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="mb-4">Compare os planos</h2>
-            <p className="text-xl text-muted-foreground">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
+        <div className="container-custom px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+            <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl">Compare os planos</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
               Todos os planos incluem o essencial. Escolha o que melhor se adapta
               ao seu volume
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto overflow-x-auto">
-            <table className="w-full">
+          <div className="max-w-5xl mx-auto overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+            <table className="w-full min-w-[600px]">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-4 px-6">Recurso</th>
-                  <th className="text-center py-4 px-6">Individual</th>
-                  <th className="text-center py-4 px-6">Clínica</th>
-                  <th className="text-center py-4 px-6">Enterprise</th>
+                  <th className="text-left py-3 sm:py-4 px-3 sm:px-6 text-sm sm:text-base">Recurso</th>
+                  <th className="text-center py-3 sm:py-4 px-3 sm:px-6 text-sm sm:text-base">Individual</th>
+                  <th className="text-center py-3 sm:py-4 px-3 sm:px-6 text-sm sm:text-base">Clínica</th>
+                  <th className="text-center py-3 sm:py-4 px-3 sm:px-6 text-sm sm:text-base">Enterprise</th>
                 </tr>
               </thead>
               <tbody>
@@ -294,28 +294,28 @@ const Solucoes = () => {
                     clinica: false,
                     enterprise: true,
                   },
-                ].map((row, index) => (
+                 ].map((row, index) => (
                   <tr key={index} className="border-b border-border">
-                    <td className="py-4 px-6">{row.feature}</td>
-                    <td className="text-center py-4 px-6">
+                    <td className="py-3 sm:py-4 px-3 sm:px-6 text-sm sm:text-base">{row.feature}</td>
+                    <td className="text-center py-3 sm:py-4 px-3 sm:px-6">
                       {row.individual ? (
-                        <CheckCircle2 className="w-5 h-5 text-success mx-auto" />
+                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-success mx-auto" />
                       ) : (
-                        <span className="text-muted-foreground">—</span>
+                        <span className="text-muted-foreground text-sm sm:text-base">—</span>
                       )}
                     </td>
-                    <td className="text-center py-4 px-6">
+                    <td className="text-center py-3 sm:py-4 px-3 sm:px-6">
                       {row.clinica ? (
-                        <CheckCircle2 className="w-5 h-5 text-success mx-auto" />
+                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-success mx-auto" />
                       ) : (
-                        <span className="text-muted-foreground">—</span>
+                        <span className="text-muted-foreground text-sm sm:text-base">—</span>
                       )}
                     </td>
-                    <td className="text-center py-4 px-6">
+                    <td className="text-center py-3 sm:py-4 px-3 sm:px-6">
                       {row.enterprise ? (
-                        <CheckCircle2 className="w-5 h-5 text-success mx-auto" />
+                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-success mx-auto" />
                       ) : (
-                        <span className="text-muted-foreground">—</span>
+                        <span className="text-muted-foreground text-sm sm:text-base">—</span>
                       )}
                     </td>
                   </tr>

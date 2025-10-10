@@ -161,39 +161,39 @@ const Index = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="hero-section pt-20">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 animate-fade-in">
-              <Badge variant="secondary" className="text-sm px-4 py-2">
+      <section className="hero-section pt-16 sm:pt-20">
+        <div className="container-custom px-4">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-6 lg:space-y-8 animate-fade-in">
+              <Badge variant="secondary" className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">
                 IA Médica que Transforma Tempo em Faturamento
               </Badge>
 
-              <h1 className="hero-headline text-balance">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-balance">
                 Transforme 2 horas de papelada em até 10 pacientes a mais por dia
               </h1>
 
-              <p className="text-xl md:text-2xl text-muted-foreground text-balance">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground text-balance">
                 A IA da MindMed automatiza relatórios e transcrições para você focar
                 no que fatura: <strong className="text-foreground">atender pacientes</strong>.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Button
                   size="lg"
-                  className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow hover:shadow-glow-intense transition-all text-lg"
+                  className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow hover:shadow-glow-intense transition-all text-base sm:text-lg w-full sm:w-auto"
                   asChild
                   onClick={() => trackEvent("cta_hero_main")}
                 >
                   <Link to="/contato">
                     Quero recuperar meu tempo agora
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                    <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                   </Link>
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-lg border-2"
+                  className="text-base sm:text-lg border-2 w-full sm:w-auto"
                   asChild
                 >
                   <Link to="#calculadora">Ver quanto posso ganhar</Link>
@@ -242,17 +242,17 @@ const Index = () => {
       </section>
 
       {/* Stats Bar */}
-      <section className="py-12 bg-gradient-subtle">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="py-8 sm:py-12 lg:py-16 bg-gradient-subtle">
+        <div className="container-custom px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {stats.map((stat, index) => (
               <div
                 key={index}
                 className="text-center animate-fade-in-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <p className="stat-number mb-2">{stat.value}</p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
+                <p className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight break-words mb-2">{stat.value}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -267,31 +267,31 @@ const Index = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="section-padding bg-gradient-subtle">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <Badge variant="secondary" className="mb-4">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
+        <div className="container-custom px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+            <Badge variant="secondary" className="mb-4 text-xs sm:text-sm">
               Benefícios
             </Badge>
-            <h2 className="mb-4">Por que escolher a MindMed?</h2>
-            <p className="text-xl text-muted-foreground">
+            <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl">Por que escolher a MindMed?</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
               Tecnologia que entende que <strong>tempo é dinheiro</strong> na medicina
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {benefits.map((benefit, index) => (
               <Card
                 key={index}
                 className="card-premium text-center animate-fade-in-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="p-6 space-y-4">
-                  <div className="inline-flex w-16 h-16 rounded-full bg-secondary/10 items-center justify-center">
-                    <benefit.icon className="w-8 h-8 text-secondary" />
+                <div className="p-5 sm:p-6 space-y-3 sm:space-y-4">
+                  <div className="inline-flex w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-secondary/10 items-center justify-center">
+                    <benefit.icon className="w-6 h-6 sm:w-8 sm:h-8 text-secondary" />
                   </div>
-                  <h3 className="text-xl font-semibold">{benefit.title}</h3>
-                  <p className="text-muted-foreground">{benefit.description}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold">{benefit.title}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">{benefit.description}</p>
                 </div>
               </Card>
             ))}
@@ -300,14 +300,14 @@ const Index = () => {
       </section>
 
       {/* How It Works */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <Badge variant="secondary" className="mb-4">
+      <section className="py-12 sm:py-16 lg:py-24 bg-background">
+        <div className="container-custom px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+            <Badge variant="secondary" className="mb-4 text-xs sm:text-sm">
               Como Funciona
             </Badge>
-            <h2 className="mb-4">4 passos para recuperar seu tempo</h2>
-            <p className="text-xl text-muted-foreground">
+            <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl">4 passos para recuperar seu tempo</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
               Simples, rápido e integrado ao seu fluxo de trabalho
             </p>
           </div>
@@ -387,43 +387,43 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding bg-gradient-subtle">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <Badge variant="secondary" className="mb-4">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
+        <div className="container-custom px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+            <Badge variant="secondary" className="mb-4 text-xs sm:text-sm">
               Depoimentos
             </Badge>
-            <h2 className="mb-4">Médicos que já recuperaram seu tempo</h2>
-            <p className="text-xl text-muted-foreground">
+            <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl">Médicos que já recuperaram seu tempo</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
               Histórias reais de profissionais que transformaram sua prática
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {testimonials.map((testimonial, index) => (
               <Card
                 key={index}
                 className="card-premium animate-fade-in-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="p-6 space-y-4">
+                <div className="p-5 sm:p-6 space-y-3 sm:space-y-4">
                   <div className="flex gap-1">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
                       <Star
                         key={i}
-                        className="w-5 h-5 fill-secondary text-secondary"
+                        className="w-4 h-4 sm:w-5 sm:h-5 fill-secondary text-secondary"
                       />
                     ))}
                   </div>
-                  <p className="text-muted-foreground italic">
+                  <p className="text-sm sm:text-base text-muted-foreground italic">
                     "{testimonial.text}"
                   </p>
-                  <div className="pt-4 border-t border-border">
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="pt-3 sm:pt-4 border-t border-border">
+                    <p className="text-sm sm:text-base font-semibold">{testimonial.name}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
                       {testimonial.specialty} • {testimonial.location}
                     </p>
-                    <Badge variant="secondary" className="mt-2">
+                    <Badge variant="secondary" className="mt-2 text-xs">
                       {testimonial.metric}
                     </Badge>
                   </div>
@@ -435,26 +435,26 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-primary text-primary-foreground">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-primary-foreground">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-primary text-primary-foreground">
+        <div className="container-custom px-4">
+          <div className="max-w-4xl mx-auto text-center space-y-6 lg:space-y-8">
+            <h2 className="text-primary-foreground text-2xl sm:text-3xl lg:text-4xl">
               Pronto para recuperar seu tempo e aumentar seu faturamento?
             </h2>
-            <p className="text-xl text-primary-foreground/80">
+            <p className="text-base sm:text-lg lg:text-xl text-primary-foreground/80">
               Junte-se a centenas de médicos que já transformaram sua prática com
               a MindMed
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow-intense text-lg"
+                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow-intense text-base sm:text-lg w-full sm:w-auto"
                 asChild
                 onClick={() => trackEvent("cta_final_demo")}
               >
                 <Link to="/contato">
                   Solicitar Demonstração Gratuita
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Link>
               </Button>
               <Button

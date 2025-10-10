@@ -6,8 +6,8 @@ const Footer = () => {
 
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container-custom py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+      <div className="container-custom px-4 py-12 md:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
@@ -170,26 +170,26 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-primary-light">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-primary-foreground/60">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <p className="text-xs sm:text-sm text-primary-foreground/60">
               © {currentYear} MindMed. Todos os direitos reservados.
             </p>
-            <div className="flex gap-6">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               <Link
                 to="/termos"
-                className="text-sm text-primary-foreground/60 hover:text-secondary transition-colors"
+                className="text-xs sm:text-sm text-primary-foreground/60 hover:text-secondary transition-colors"
               >
                 Termos de Uso
               </Link>
               <Link
                 to="/privacidade"
-                className="text-sm text-primary-foreground/60 hover:text-secondary transition-colors"
+                className="text-xs sm:text-sm text-primary-foreground/60 hover:text-secondary transition-colors"
               >
                 Política de Privacidade
               </Link>
               <Link
                 to="/lgpd"
-                className="text-sm text-primary-foreground/60 hover:text-secondary transition-colors"
+                className="text-xs sm:text-sm text-primary-foreground/60 hover:text-secondary transition-colors"
               >
                 LGPD
               </Link>
