@@ -120,6 +120,15 @@ const Header = () => {
               asChild
               className="hover:bg-secondary-muted"
             >
+              <a href="https://acesso.mindmed.online" target="_blank" rel="noopener noreferrer">
+                Entrar
+              </a>
+            </Button>
+            <Button
+              variant="ghost"
+              asChild
+              className="hover:bg-secondary-muted"
+            >
               <Link to="/contato">Falar com Vendas</Link>
             </Button>
             <Button
@@ -210,6 +219,11 @@ const Header = () => {
                 Recursos
               </Link>
               <div className="flex flex-col gap-2 px-4 pt-3 sm:pt-4 border-t border-border">
+                <Button variant="outline" asChild className="w-full text-sm">
+                  <a href="https://acesso.mindmed.online" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>
+                    Entrar
+                  </a>
+                </Button>
                 <Button variant="outline" asChild className="w-full text-sm">
                   <Link to="/contato" onClick={() => setIsMobileMenuOpen(false)}>
                     Falar com Vendas
