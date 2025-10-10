@@ -460,7 +460,7 @@ const Index = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-lg border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
+                className="bg-black text-white border-2 border-white hover:bg-black/90 text-lg w-full sm:w-auto"
                 asChild
               >
                 <Link to="/precos">Ver Planos e Preços</Link>
