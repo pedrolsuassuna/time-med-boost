@@ -157,8 +157,8 @@ const FinancialCalculator = () => {
           {result && (
             <div className="mt-8 pt-8 border-t border-border animate-fade-in-up">
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-gradient-subtle rounded-lg p-6 text-center space-y-2">
-                  <Clock className="w-8 h-8 text-secondary mx-auto" />
+                <div className="bg-gradient-subtle rounded-lg p-6 text-center space-y-3 flex flex-col items-center justify-center min-h-[180px]">
+                  <Clock className="w-8 h-8 text-secondary mx-auto flex-shrink-0" />
                   <p className="text-sm text-muted-foreground">Tempo Recuperado</p>
                   <p className="stat-number">
                     {result.hoursRecovered.toFixed(1)}h
@@ -166,15 +166,15 @@ const FinancialCalculator = () => {
                   <p className="text-xs text-muted-foreground">por dia</p>
                 </div>
 
-                <div className="bg-gradient-subtle rounded-lg p-6 text-center space-y-2">
-                  <TrendingUp className="w-8 h-8 text-secondary mx-auto" />
+                <div className="bg-gradient-subtle rounded-lg p-6 text-center space-y-3 flex flex-col items-center justify-center min-h-[180px]">
+                  <TrendingUp className="w-8 h-8 text-secondary mx-auto flex-shrink-0" />
                   <p className="text-sm text-muted-foreground">Consultas Extras</p>
                   <p className="stat-number">+{result.extraPatients}</p>
                   <p className="text-xs text-muted-foreground">por dia</p>
                 </div>
 
-                <div className="bg-gradient-subtle rounded-lg p-6 text-center space-y-2">
-                  <DollarSign className="w-8 h-8 text-success mx-auto" />
+                <div className="bg-gradient-subtle rounded-lg p-6 text-center space-y-3 flex flex-col items-center justify-center min-h-[180px]">
+                  <DollarSign className="w-8 h-8 text-success mx-auto flex-shrink-0" />
                   <p className="text-sm text-muted-foreground">Receita Extra/Mês</p>
                   <p className="stat-number text-success">
                     {result.monthlyRevenue.toLocaleString("pt-BR", {
@@ -186,8 +186,8 @@ const FinancialCalculator = () => {
                   </p>
                 </div>
 
-                <div className="bg-gradient-subtle rounded-lg p-6 text-center space-y-2">
-                  <DollarSign className="w-8 h-8 text-success mx-auto" />
+                <div className="bg-gradient-subtle rounded-lg p-6 text-center space-y-3 flex flex-col items-center justify-center min-h-[180px]">
+                  <DollarSign className="w-8 h-8 text-success mx-auto flex-shrink-0" />
                   <p className="text-sm text-muted-foreground">Receita Extra/Ano</p>
                   <p className="stat-number text-success">
                     {result.yearlyRevenue.toLocaleString("pt-BR", {
