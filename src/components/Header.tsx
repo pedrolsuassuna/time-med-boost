@@ -44,18 +44,18 @@ const Header = () => {
           : "bg-transparent"
       )}
     >
-      <nav className="container-custom">
-        <div className="flex items-center justify-between h-16 md:h-20">
+      <nav className="container-custom px-4">
+        <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-1.5 sm:gap-2 group"
             onClick={() => trackEvent("logo_click")}
           >
-            <div className="relative w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow group-hover:shadow-glow-intense transition-all">
-              <span className="text-2xl font-bold text-primary-foreground">M</span>
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow group-hover:shadow-glow-intense transition-all">
+              <span className="text-lg sm:text-2xl font-bold text-primary-foreground">M</span>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <span className="text-base sm:text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               MindMed
             </span>
           </Link>
@@ -134,21 +134,21 @@ const Header = () => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-md hover:bg-muted transition-colors"
+            className="lg:hidden p-1.5 sm:p-2 rounded-md hover:bg-muted transition-colors"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border animate-fade-in bg-background">
-            <div className="flex flex-col gap-4">
+          <div className="lg:hidden py-3 sm:py-4 border-t border-border animate-fade-in bg-background">
+            <div className="flex flex-col gap-2 sm:gap-4">
               <Link
                 to="/"
                 className={cn(
@@ -209,15 +209,15 @@ const Header = () => {
               >
                 Recursos
               </Link>
-              <div className="flex flex-col gap-2 px-4 pt-4 border-t border-border">
-                <Button variant="outline" asChild className="w-full">
+              <div className="flex flex-col gap-2 px-4 pt-3 sm:pt-4 border-t border-border">
+                <Button variant="outline" asChild className="w-full text-sm">
                   <Link to="/contato" onClick={() => setIsMobileMenuOpen(false)}>
                     Falar com Vendas
                   </Link>
                 </Button>
                 <Button
                   asChild
-                  className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground"
+                  className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-sm"
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     trackEvent("cta_mobile_demo");

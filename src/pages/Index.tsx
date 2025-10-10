@@ -161,53 +161,53 @@ const Index = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="hero-section pt-16 sm:pt-20">
+      <section className="hero-section pt-20 pb-12 sm:pt-24 sm:pb-16 lg:pt-32 lg:pb-20">
         <div className="container-custom px-4">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="space-y-6 lg:space-y-8 animate-fade-in">
-              <Badge variant="secondary" className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">
+            <div className="space-y-4 sm:space-y-6 lg:space-y-8 animate-fade-in">
+              <Badge variant="secondary" className="text-xs px-3 py-1.5">
                 IA Médica que Transforma Tempo em Faturamento
               </Badge>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-balance">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
                 Transforme 2 horas de papelada em até 10 pacientes a mais por dia
               </h1>
 
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground text-balance">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground">
                 A IA da MindMed automatiza relatórios e transcrições para você focar
                 no que fatura: <strong className="text-foreground">atender pacientes</strong>.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   size="lg"
-                  className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow hover:shadow-glow-intense transition-all text-base sm:text-lg w-full sm:w-auto"
+                  className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow hover:shadow-glow-intense transition-all text-sm sm:text-base w-full sm:w-auto"
                   asChild
                   onClick={() => trackEvent("cta_hero_main")}
                 >
                   <Link to="/contato">
-                    Quero recuperar meu tempo agora
-                    <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
+                    Recuperar meu tempo agora
+                    <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-base sm:text-lg border-2 w-full sm:w-auto"
+                  className="text-sm sm:text-base border-2 w-full sm:w-auto"
                   asChild
                 >
-                  <Link to="#calculadora">Ver quanto posso ganhar</Link>
+                  <Link to="#calculadora">Calcular ganhos</Link>
                 </Button>
               </div>
 
-              <div className="pt-8 border-t border-border">
-                <p className="text-sm text-muted-foreground mb-4">
+              <div className="pt-6 sm:pt-8 border-t border-border">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
                   Confiado por médicos em:
                 </p>
-                <div className="flex flex-wrap gap-8 opacity-60">
+                <div className="flex flex-wrap gap-4 sm:gap-8 opacity-60">
                   {["Hospital XYZ", "Clínica ABC", "Rede Med+", "Instituto DEF"].map(
                     (name) => (
-                      <div key={name} className="text-sm font-medium">
+                      <div key={name} className="text-xs sm:text-sm font-medium">
                         {name}
                       </div>
                     )
@@ -216,8 +216,8 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="relative animate-fade-in animation-delay-200">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative animate-fade-in animation-delay-200 mt-8 lg:mt-0">
+              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src={heroImage}
                   alt="Médica usando tecnologia MindMed"
@@ -225,14 +225,14 @@ const Index = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-card p-6 rounded-xl shadow-xl border border-border animate-float">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-success/10 flex items-center justify-center">
-                    <CheckCircle2 className="w-6 h-6 text-success" />
+              <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-card p-3 sm:p-6 rounded-lg sm:rounded-xl shadow-xl border border-border animate-float">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-success/10 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 sm:w-6 sm:h-6 text-success" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold">2.5h</p>
-                    <p className="text-sm text-muted-foreground">tempo economizado/dia</p>
+                    <p className="text-lg sm:text-2xl font-bold">2.5h</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">economizado/dia</p>
                   </div>
                 </div>
               </div>
