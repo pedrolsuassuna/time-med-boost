@@ -1,10 +1,1 @@
 project_id = "snmtupjzgpoaezicrfck"
-
-[functions.cakto-webhook]
-verify_jwt = false
-
-[functions.generate-prescription]
-verify_jwt = true
-
-[functions.setup-admin]
-verify_jwt = false

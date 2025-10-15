@@ -1,19 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, LogOut } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/hooks/useAuth";
-import { useToast } from "@/hooks/use-toast";
-
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { user, signOut } = useAuth();
-  const { toast } = useToast();
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -21,14 +15,6 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleLogout = async () => {
-    await signOut();
-    toast({
-      title: "Logout realizado",
-      description: "Até logo!",
-    });
-  };
   const isActive = (path: string) => location.pathname === path;
   const trackEvent = (eventName: string) => {
     if (typeof window !== "undefined" && (window as any).gtag) {
@@ -71,46 +57,21 @@ const Header = () => {
             <Link to="/recursos" className={cn("text-sm font-medium transition-colors hover:text-secondary", isActive("/recursos") ? "text-secondary" : "text-foreground")}>
               Recursos
             </Link>
-
-            <Link to="/perfil" className={cn("text-sm font-medium transition-colors hover:text-secondary", isActive("/perfil") ? "text-secondary" : "text-foreground")}>
-              Perfil
-            </Link>
-
-            <Link to="/receita" className={cn("text-sm font-medium transition-colors hover:text-secondary", isActive("/receita") ? "text-secondary" : "text-foreground")}>
-              Receitas
-            </Link>
-
-            <Link to="/dashboard" className={cn("text-sm font-medium transition-colors hover:text-secondary", isActive("/dashboard") ? "text-secondary" : "text-foreground")}>
-              Dashboard
-            </Link>
           </div>
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
-              {user ? (
-                <>
-                  <Button variant="ghost" asChild className="hover:bg-secondary-muted">
-                    <Link to="/dashboard">Dashboard</Link>
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={handleLogout}
-                    className="hover:bg-destructive hover:text-destructive-foreground"
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Sair
-                  </Button>
-                </>
-              ) : (
-              <>
-                <Button variant="ghost" asChild className="hover:bg-secondary-muted">
-                  <Link to="/login">Entrar</Link>
-                </Button>
-                <Button asChild className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow hover:shadow-glow-intense transition-all" onClick={() => trackEvent("cta_header_signup")}>
-                  <Link to="/signup">Criar Conta</Link>
-                </Button>
-              </>
-            )}
+            <Button variant="ghost" asChild className="hover:bg-secondary-muted">
+              <a href="https://acesso.mindmed.online" target="_blank" rel="noopener noreferrer">
+                Entrar
+              </a>
+            </Button>
+            <Button variant="ghost" asChild className="hover:bg-secondary-muted">
+              
+            </Button>
+            <Button asChild className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow hover:shadow-glow-intense transition-all" onClick={() => trackEvent("cta_header_demo")}>
+              
+            </Button>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -137,50 +98,23 @@ const Header = () => {
               <Link to="/recursos" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/recursos") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>
                 Recursos
               </Link>
-              <Link to="/perfil" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/perfil") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>
-                Perfil
-              </Link>
-              <Link to="/receita" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/receita") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>
-                Receitas
-              </Link>
-              <Link to="/dashboard" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/dashboard") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>
-                Dashboard
-              </Link>
               <div className="flex flex-col gap-2 px-4 pt-3 sm:pt-4 border-t border-border">
-                {user ? (
-                  <>
-                    <Button variant="outline" asChild className="w-full text-sm">
-                      <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
-                        Dashboard
-                      </Link>
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      onClick={() => {
-                        handleLogout();
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="w-full text-sm hover:bg-destructive hover:text-destructive-foreground"
-                    >
-                      <LogOut className="w-4 h-4 mr-2" />
-                      Sair
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <Button variant="outline" asChild className="w-full text-sm">
-                      <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                        Entrar
-                      </Link>
-                    </Button>
-                    <Button asChild className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-sm" onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      trackEvent("cta_mobile_signup");
-                    }}>
-                      <Link to="/signup">Criar Conta</Link>
-                    </Button>
-                  </>
-                )}
+                <Button variant="outline" asChild className="w-full text-sm">
+                  <a href="https://acesso.mindmed.online" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>
+                    Entrar
+                  </a>
+                </Button>
+                <Button variant="outline" asChild className="w-full text-sm">
+                  <Link to="/contato" onClick={() => setIsMobileMenuOpen(false)}>
+                    Falar com Vendas
+                  </Link>
+                </Button>
+                <Button asChild className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-sm" onClick={() => {
+              setIsMobileMenuOpen(false);
+              trackEvent("cta_mobile_demo");
+            }}>
+                  <Link to="/contato">Solicitar Demo</Link>
+                </Button>
               </div>
             </div>
           </div>}
