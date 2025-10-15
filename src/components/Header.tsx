@@ -57,6 +57,10 @@ const Header = () => {
             <Link to="/recursos" className={cn("text-sm font-medium transition-colors hover:text-secondary", isActive("/recursos") ? "text-secondary" : "text-foreground")}>
               Recursos
             </Link>
+
+            <Link to="/perfil" className={cn("text-sm font-medium transition-colors hover:text-secondary", isActive("/perfil") ? "text-secondary" : "text-foreground")}>
+              Perfil
+            </Link>
           </div>
 
           {/* CTA Buttons */}
@@ -97,6 +101,9 @@ const Header = () => {
               </Link>
               <Link to="/recursos" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/recursos") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>
                 Recursos
+              </Link>
+              <Link to="/perfil" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/perfil") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>
+                Perfil
               </Link>
               <div className="flex flex-col gap-2 px-4 pt-3 sm:pt-4 border-t border-border">
                 <Button variant="outline" asChild className="w-full text-sm">
