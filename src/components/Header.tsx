@@ -79,25 +79,29 @@ const Header = () => {
             <Link to="/receita" className={cn("text-sm font-medium transition-colors hover:text-secondary", isActive("/receita") ? "text-secondary" : "text-foreground")}>
               Receitas
             </Link>
+
+            <Link to="/dashboard" className={cn("text-sm font-medium transition-colors hover:text-secondary", isActive("/dashboard") ? "text-secondary" : "text-foreground")}>
+              Dashboard
+            </Link>
           </div>
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
-            {user ? (
-              <>
-                <Button variant="ghost" asChild className="hover:bg-secondary-muted">
-                  <Link to="/billing">Minha Conta</Link>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={handleLogout}
-                  className="hover:bg-destructive hover:text-destructive-foreground"
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Sair
-                </Button>
-              </>
-            ) : (
+              {user ? (
+                <>
+                  <Button variant="ghost" asChild className="hover:bg-secondary-muted">
+                    <Link to="/dashboard">Dashboard</Link>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={handleLogout}
+                    className="hover:bg-destructive hover:text-destructive-foreground"
+                  >
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sair
+                  </Button>
+                </>
+              ) : (
               <>
                 <Button variant="ghost" asChild className="hover:bg-secondary-muted">
                   <Link to="/login">Entrar</Link>
@@ -139,12 +143,15 @@ const Header = () => {
               <Link to="/receita" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/receita") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>
                 Receitas
               </Link>
+              <Link to="/dashboard" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/dashboard") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>
+                Dashboard
+              </Link>
               <div className="flex flex-col gap-2 px-4 pt-3 sm:pt-4 border-t border-border">
                 {user ? (
                   <>
                     <Button variant="outline" asChild className="w-full text-sm">
-                      <Link to="/billing" onClick={() => setIsMobileMenuOpen(false)}>
-                        Minha Conta
+                      <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+                        Dashboard
                       </Link>
                     </Button>
                     <Button 

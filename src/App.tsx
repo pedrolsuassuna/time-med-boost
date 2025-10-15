@@ -14,6 +14,7 @@ import Perfil from "./pages/Perfil";
 import Receita from "./pages/Receita";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
         <Route path="/billing" element={<Billing />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/receita" element={<Receita />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />

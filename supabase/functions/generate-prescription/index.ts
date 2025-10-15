@@ -323,6 +323,21 @@ serve(async (req) => {
     const pdfBytes = await pdfDoc.save();
     const pdfBase64 = btoa(String.fromCharCode(...pdfBytes));
 
+    // Save prescription to history
+    const { error: historyError } = await supabase
+      .from('prescriptions')
+      .insert({
+        user_id: user.id,
+        patient_name: body.patient_name,
+        patient_age: body.patient_age,
+        medications: body.medications,
+        observations: body.observations,
+      });
+
+    if (historyError) {
+      console.error('Error saving prescription history:', historyError);
+    }
+
     // Increment quota for Starter plan
     if (subscription.plan === 'starter') {
       await supabase

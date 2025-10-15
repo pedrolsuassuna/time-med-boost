@@ -44,7 +44,7 @@ const Login = () => {
         description: "Bem-vindo de volta!",
       });
 
-      navigate("/receita");
+      navigate("/dashboard");
 
     } catch (error) {
       console.error('Login error:', error);

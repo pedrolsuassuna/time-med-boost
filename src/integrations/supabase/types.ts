@@ -91,6 +91,36 @@ export type Database = {
         }
         Relationships: []
       }
+      prescriptions: {
+        Row: {
+          created_at: string
+          id: string
+          medications: Json
+          observations: string | null
+          patient_age: string | null
+          patient_name: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          medications: Json
+          observations?: string | null
+          patient_age?: string | null
+          patient_name: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          medications?: Json
+          observations?: string | null
+          patient_age?: string | null
+          patient_name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_profiles: {
         Row: {
           address: string | null
