@@ -14,7 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      billing_events: {
+        Row: {
+          created_at: string
+          event_data: Json | null
+          event_type: string
+          id: string
+          subscription_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          subscription_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          subscription_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "billing_events_subscription_id_fkey"
+            columns: ["subscription_id"]
+            isOneToOne: false
+            referencedRelation: "plan_subscriptions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plan_subscriptions: {
+        Row: {
+          cakto_customer_id: string | null
+          cakto_subscription_id: string | null
+          canceled_at: string | null
+          created_at: string
+          id: string
+          plan: Database["public"]["Enums"]["plan_type"]
+          quota_total: number | null
+          quota_used: number | null
+          renews_at: string | null
+          status: Database["public"]["Enums"]["subscription_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cakto_customer_id?: string | null
+          cakto_subscription_id?: string | null
+          canceled_at?: string | null
+          created_at?: string
+          id?: string
+          plan: Database["public"]["Enums"]["plan_type"]
+          quota_total?: number | null
+          quota_used?: number | null
+          renews_at?: string | null
+          status?: Database["public"]["Enums"]["subscription_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cakto_customer_id?: string | null
+          cakto_subscription_id?: string | null
+          canceled_at?: string | null
+          created_at?: string
+          id?: string
+          plan?: Database["public"]["Enums"]["plan_type"]
+          quota_total?: number | null
+          quota_used?: number | null
+          renews_at?: string | null
+          status?: Database["public"]["Enums"]["subscription_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +99,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      plan_type: "starter" | "pro"
+      subscription_status: "active" | "canceled" | "expired" | "pending"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +227,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      plan_type: ["starter", "pro"],
+      subscription_status: ["active", "canceled", "expired", "pending"],
+    },
   },
 } as const

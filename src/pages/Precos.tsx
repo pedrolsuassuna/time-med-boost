@@ -23,13 +23,14 @@ const Precos = () => {
       period: "/mês",
       description: "Para médicos individuais começarem",
       features: [
-        "Até 10 consultas/dia",
+        "Até 10 consultas/mês",
         "Transcrição ilimitada",
         "Laudos automáticos",
         "Suporte por email",
         "Exportação PDF/DOCX",
       ],
       cta: "Começar Agora",
+      url: "https://pay.cakto.com.br/3bsu2vi_607441",
       highlight: false,
     },
     {
@@ -38,7 +39,7 @@ const Precos = () => {
       period: "/mês",
       description: "Para clínicas e profissionais de alto volume",
       features: [
-        "Consultas ilimitadas",
+        "Consultas ILIMITADAS",
         "Tudo do Starter +",
         "Integrações EMR",
         "Dashboard gerencial",
@@ -46,6 +47,7 @@ const Precos = () => {
         "API acesso",
       ],
       cta: "Testar 14 Dias Grátis",
+      url: "https://pay.cakto.com.br/u95r4cv_607505",
       highlight: true,
     },
     {
@@ -62,6 +64,7 @@ const Precos = () => {
         "Contrato personalizado",
       ],
       cta: "Falar com Vendas",
+      url: "/contato",
       highlight: false,
     },
   ];
@@ -122,10 +125,17 @@ const Precos = () => {
                     variant={plan.highlight ? "default" : "outline"}
                     asChild
                   >
-                    <Link to="/contato">
-                      {plan.cta}
-                      <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
-                    </Link>
+                    {plan.url.startsWith('http') ? (
+                      <a href={plan.url} target="_blank" rel="noopener noreferrer">
+                        {plan.cta}
+                        <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
+                      </a>
+                    ) : (
+                      <Link to={plan.url}>
+                        {plan.cta}
+                        <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
+                      </Link>
+                    )}
                   </Button>
                 </div>
               </Card>
