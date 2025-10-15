@@ -31,6 +31,7 @@ const Receita = () => {
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [hasProfile, setHasProfile] = useState(false);
+  const [subscription, setSubscription] = useState<any>(null);
   const [prescription, setPrescription] = useState<PrescriptionData>({
     patient_name: '',
     patient_age: '',
@@ -53,7 +54,7 @@ const Receita = () => {
         description: "Faça login para criar receitas",
         variant: "destructive",
       });
-      navigate("/");
+      navigate("/login");
       return;
     }
 
@@ -74,6 +75,36 @@ const Receita = () => {
       return;
     }
 
+    // Check subscription
+    const { data: sub, error: subError } = await supabase
+      .from('plan_subscriptions')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('status', 'active')
+      .maybeSingle();
+
+    if (subError || !sub) {
+      toast({
+        title: "Assinatura necessária",
+        description: "Assine um plano para criar receitas",
+        variant: "destructive",
+      });
+      navigate("/precos");
+      return;
+    }
+
+    // Check quota for Starter plan
+    if (sub.plan === 'starter' && sub.quota_used >= sub.quota_total) {
+      toast({
+        title: "Cota esgotada",
+        description: "Você atingiu o limite de receitas do seu plano. Faça upgrade para continuar.",
+        variant: "destructive",
+      });
+      navigate("/billing");
+      return;
+    }
+
+    setSubscription(sub);
     setHasProfile(true);
     setLoading(false);
   };
@@ -199,6 +230,17 @@ const Receita = () => {
             </h1>
 
             <Card className="card-premium p-6 sm:p-8 space-y-8">
+              {/* Quota Info for Starter Plan */}
+              {subscription?.plan === 'starter' && (
+                <div className="p-4 bg-muted rounded-lg">
+                  <p className="text-sm text-muted-foreground">
+                    Receitas disponíveis: <span className="font-bold text-foreground">
+                      {subscription.quota_total - subscription.quota_used} de {subscription.quota_total}
+                    </span>
+                  </p>
+                </div>
+              )}
+
               {/* Dados do Paciente */}
               <div className="space-y-4">
                 <h2 className="text-xl font-bold">Dados do Paciente</h2>

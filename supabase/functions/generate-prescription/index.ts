@@ -45,6 +45,25 @@ serve(async (req) => {
 
     const body: PrescriptionRequest = await req.json();
 
+    // Check active subscription
+    const { data: subscription, error: subError } = await supabase
+      .from('plan_subscriptions')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('status', 'active')
+      .single();
+
+    if (subError || !subscription) {
+      throw new Error('No active subscription found');
+    }
+
+    // Check quota for Starter plan
+    if (subscription.plan === 'starter') {
+      if (subscription.quota_used >= subscription.quota_total) {
+        throw new Error('Quota exceeded. Please upgrade your plan.');
+      }
+    }
+
     // Fetch user profile
     const { data: profile, error: profileError } = await supabase
       .from('user_profiles')
@@ -304,6 +323,16 @@ serve(async (req) => {
     const pdfBytes = await pdfDoc.save();
     const pdfBase64 = btoa(String.fromCharCode(...pdfBytes));
 
+    // Increment quota for Starter plan
+    if (subscription.plan === 'starter') {
+      await supabase
+        .from('plan_subscriptions')
+        .update({ quota_used: subscription.quota_used + 1 })
+        .eq('id', subscription.id);
+    }
+
+    console.log('Prescription generated successfully for user:', user.id);
+
     return new Response(
       JSON.stringify({ pdf: pdfBase64 }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -312,7 +341,7 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error generating prescription:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
