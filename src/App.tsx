@@ -11,6 +11,7 @@ import Recursos from "./pages/Recursos";
 import Contato from "./pages/Contato";
 import Billing from "./pages/Billing";
 import Perfil from "./pages/Perfil";
+import Receita from "./pages/Receita";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,9 +29,10 @@ const App = () => (
           <Route path="/precos" element={<Precos />} />
           <Route path="/recursos" element={<Recursos />} />
           <Route path="/contato" element={<Contato />} />
-          <Route path="/billing" element={<Billing />} />
-          <Route path="/perfil" element={<Perfil />} />
-          <Route path="*" element={<NotFound />} />
+        <Route path="/billing" element={<Billing />} />
+        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/receita" element={<Receita />} />
+        <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
