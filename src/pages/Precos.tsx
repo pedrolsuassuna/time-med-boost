@@ -30,6 +30,7 @@ const Precos = () => {
         "Exportação PDF/DOCX",
       ],
       cta: "Começar Agora",
+      ctaLink: "https://pay.cakto.com.br/3bsu2vi_607441",
       highlight: false,
     },
     {
@@ -45,7 +46,8 @@ const Precos = () => {
         "Suporte prioritário",
         "API acesso",
       ],
-      cta: "Testar 14 Dias Grátis",
+      cta: "Começar Agora",
+      ctaLink: "https://pay.cakto.com.br/u95r4cv_607505",
       highlight: true,
     },
     {
@@ -62,6 +64,7 @@ const Precos = () => {
         "Contrato personalizado",
       ],
       cta: "Falar com Vendas",
+      ctaLink: "/contato",
       highlight: false,
     },
   ];
@@ -122,10 +125,10 @@ const Precos = () => {
                     variant={plan.highlight ? "default" : "outline"}
                     asChild
                   >
-                    <Link to="/contato">
+                    <a href={plan.ctaLink} target={plan.ctaLink.startsWith('http') ? '_blank' : undefined} rel={plan.ctaLink.startsWith('http') ? 'noopener noreferrer' : undefined}>
                       {plan.cta}
                       <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
-                    </Link>
+                    </a>
                   </Button>
                 </div>
               </Card>
