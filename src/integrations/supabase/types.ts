@@ -91,6 +91,63 @@ export type Database = {
         }
         Relationships: []
       }
+      user_profiles: {
+        Row: {
+          address: string | null
+          clinic_name: string | null
+          created_at: string
+          crm: string | null
+          crm_uf: string | null
+          email_public: string | null
+          full_name: string | null
+          id: string
+          logo_url: string | null
+          phone: string | null
+          prescription_footer_text: string | null
+          signature_image_url: string | null
+          specialty: string | null
+          stamp_image_url: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address?: string | null
+          clinic_name?: string | null
+          created_at?: string
+          crm?: string | null
+          crm_uf?: string | null
+          email_public?: string | null
+          full_name?: string | null
+          id?: string
+          logo_url?: string | null
+          phone?: string | null
+          prescription_footer_text?: string | null
+          signature_image_url?: string | null
+          specialty?: string | null
+          stamp_image_url?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address?: string | null
+          clinic_name?: string | null
+          created_at?: string
+          crm?: string | null
+          crm_uf?: string | null
+          email_public?: string | null
+          full_name?: string | null
+          id?: string
+          logo_url?: string | null
+          phone?: string | null
+          prescription_footer_text?: string | null
+          signature_image_url?: string | null
+          specialty?: string | null
+          stamp_image_url?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
