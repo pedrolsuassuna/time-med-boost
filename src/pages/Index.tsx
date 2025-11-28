@@ -232,11 +232,11 @@ const Index = () => {
             </Badge>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-foreground">
-              Atenda até <span className="text-secondary">40% mais pacientes</span> por dia{" "}
-              <span className="text-muted-foreground">sem digitar nada</span>
+              Atenda até <span className="text-primary">40% mais pacientes</span> por dia{" "}
+              <span className="text-foreground/80">sem digitar nada</span>
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto">
               Laudos e receituários completos em segundos.{" "}
               <strong className="text-foreground">Economize até 2 horas por dia</strong> de
               papelada e aumente o faturamento do consultório usando IA.
