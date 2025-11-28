@@ -42,6 +42,11 @@
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
     
+    /* CTA Emerald Green - Alta Conversão */
+    --cta: 160 84% 39%;
+    --cta-foreground: 0 0% 100%;
+    --cta-hover: 160 84% 34%;
+    
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
     

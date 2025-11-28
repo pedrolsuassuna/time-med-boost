@@ -66,11 +66,10 @@ const Header = () => {
                 Entrar
               </a>
             </Button>
-            <Button variant="ghost" asChild className="hover:bg-secondary-muted">
-              
-            </Button>
-            <Button asChild className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow hover:shadow-glow-intense transition-all" onClick={() => trackEvent("cta_header_demo")}>
-              
+            <Button variant="cta" asChild className="rounded-full px-6 shadow-lg hover:shadow-xl" onClick={() => trackEvent("cta_header_demo")}>
+              <a href="https://pay.cakto.com.br/u95r4cv_607505" target="_blank" rel="noopener noreferrer">
+                Testar MindMed PRO
+              </a>
             </Button>
           </div>
 
@@ -104,16 +103,13 @@ const Header = () => {
                     Entrar
                   </a>
                 </Button>
-                <Button variant="outline" asChild className="w-full text-sm">
-                  <Link to="/contato" onClick={() => setIsMobileMenuOpen(false)}>
-                    Falar com Vendas
-                  </Link>
-                </Button>
-                <Button asChild className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-sm" onClick={() => {
+                <Button variant="cta" asChild className="w-full text-sm rounded-full" onClick={() => {
               setIsMobileMenuOpen(false);
               trackEvent("cta_mobile_demo");
             }}>
-                  <Link to="/contato">Solicitar Demo</Link>
+                  <a href="https://pay.cakto.com.br/u95r4cv_607505" target="_blank" rel="noopener noreferrer">
+                    Testar MindMed PRO
+                  </a>
                 </Button>
               </div>
             </div>

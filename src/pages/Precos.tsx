@@ -110,8 +110,8 @@ const Precos = () => {
                   </div>
                   <ul className="space-y-2 sm:space-y-3">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-success mt-0.5 flex-shrink-0" />
+                    <li key={i} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-cta mt-0.5 flex-shrink-0" />
                         <span className="text-xs sm:text-sm">{feature}</span>
                       </li>
                     ))}
@@ -119,10 +119,10 @@ const Precos = () => {
                   <Button
                     className={`w-full text-sm sm:text-base ${
                       plan.highlight
-                        ? "bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow"
+                        ? "bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg"
                         : ""
                     }`}
-                    variant={plan.highlight ? "default" : "outline"}
+                    variant={plan.highlight ? "cta" : "outline"}
                     asChild
                   >
                     <a href={plan.ctaLink} target={plan.ctaLink.startsWith('http') ? '_blank' : undefined} rel={plan.ctaLink.startsWith('http') ? 'noopener noreferrer' : undefined}>
