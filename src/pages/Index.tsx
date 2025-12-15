@@ -345,19 +345,24 @@ const Index = () => {
     { value: "4.9/5", label: "Avaliação Média" },
   ];
 
-  const CTAButton = ({ className = "", size = "lg" as const, text = "Criar Minha Conta Agora" }) => (
-    <Button
-      size={size}
-      className={`bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 ${className}`}
-      asChild
-      onClick={() => trackEvent("cta_click")}
-    >
-      <a href="https://pay.cakto.com.br/u95r4cv_607505" target="_blank" rel="noopener noreferrer">
+  const CTAButton = ({ className = "", size = "lg" as const, text = "Criar Minha Conta Agora" }) => {
+    const handleClick = () => {
+      trackEvent("cta_click");
+    };
+    
+    return (
+      <a 
+        href="https://pay.cakto.com.br/u95r4cv_607505" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        onClick={handleClick}
+        className={`inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 h-11 ${size === "lg" ? "h-12 px-10" : ""} ${className}`}
+      >
         {text}
-        <ArrowRight className="ml-2 w-5 h-5" />
+        <ArrowRight className="w-5 h-5" />
       </a>
-    </Button>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen">
