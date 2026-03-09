@@ -311,16 +311,14 @@ const Precos = () => {
             <Button
               size="lg"
               className="bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg text-lg px-8"
-              asChild
+              onClick={() => handleCheckout("pro")}
+              disabled={loadingPlan === "pro"}
             >
-              <a
-                href="https://pay.cakto.com.br/u95r4cv_607505"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Criar Minha Conta Agora
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </a>
+              {loadingPlan === "pro" ? (
+                <><Loader2 className="mr-2 w-5 h-5 animate-spin" /> Processando...</>
+              ) : (
+                <>Criar Minha Conta Agora <ArrowRight className="ml-2 w-5 h-5" /></>
+              )}
             </Button>
           </div>
         </div>
