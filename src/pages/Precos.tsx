@@ -1,13 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { CheckCircle2, ArrowRight, X, Check, Sparkles } from "lucide-react";
+import { CheckCircle2, ArrowRight, X, Check, Sparkles, Loader2 } from "lucide-react";
+import { createCheckoutSession, STRIPE_PLANS } from "@/lib/stripe";
+import { toast } from "sonner";
 
 const Precos = () => {
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
   useEffect(() => {
     if (typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "pricing_view", {
@@ -15,6 +19,18 @@ const Precos = () => {
       });
     }
   }, []);
+
+  const handleCheckout = async (plan: "starter" | "pro") => {
+    setLoadingPlan(plan);
+    try {
+      await createCheckoutSession(STRIPE_PLANS[plan].price_id);
+    } catch (error) {
+      toast.error("Erro ao iniciar o checkout. Tente novamente.");
+      console.error(error);
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
 
   const starterFeatures = [
     "Gravação de áudio da consulta",
@@ -120,15 +136,17 @@ const Precos = () => {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full text-sm sm:text-base" variant="outline" asChild>
-                  <a
-                    href="https://pay.cakto.com.br/3bsu2vi_607441"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Começar Agora
-                    <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
-                  </a>
+                <Button
+                  className="w-full text-sm sm:text-base"
+                  variant="outline"
+                  onClick={() => handleCheckout("starter")}
+                  disabled={loadingPlan === "starter"}
+                >
+                  {loadingPlan === "starter" ? (
+                    <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</>
+                  ) : (
+                    <>Começar Agora <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" /></>
+                  )}
                 </Button>
               </div>
             </Card>
@@ -173,16 +191,14 @@ const Precos = () => {
                 <Button
                   className="w-full text-sm sm:text-base bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg"
                   variant="cta"
-                  asChild
+                  onClick={() => handleCheckout("pro")}
+                  disabled={loadingPlan === "pro"}
                 >
-                  <a
-                    href="https://pay.cakto.com.br/u95r4cv_607505"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Começar PRO Agora
-                    <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
-                  </a>
+                  {loadingPlan === "pro" ? (
+                    <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</>
+                  ) : (
+                    <>Começar PRO Agora <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" /></>
+                  )}
                 </Button>
               </div>
             </Card>
@@ -295,16 +311,14 @@ const Precos = () => {
             <Button
               size="lg"
               className="bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg text-lg px-8"
-              asChild
+              onClick={() => handleCheckout("pro")}
+              disabled={loadingPlan === "pro"}
             >
-              <a
-                href="https://pay.cakto.com.br/u95r4cv_607505"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Criar Minha Conta Agora
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </a>
+              {loadingPlan === "pro" ? (
+                <><Loader2 className="mr-2 w-5 h-5 animate-spin" /> Processando...</>
+              ) : (
+                <>Criar Minha Conta Agora <ArrowRight className="ml-2 w-5 h-5" /></>
+              )}
             </Button>
           </div>
         </div>

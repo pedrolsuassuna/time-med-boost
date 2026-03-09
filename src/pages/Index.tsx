@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -351,16 +351,14 @@ const Index = () => {
     };
     
     return (
-      <a 
-        href="https://pay.cakto.com.br/u95r4cv_607505" 
-        target="_blank" 
-        rel="noopener noreferrer"
+      <Link 
+        to="/precos"
         onClick={handleClick}
         className={`inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 h-11 ${size === "lg" ? "h-12 px-10" : ""} ${className}`}
       >
         {text}
         <ArrowRight className="w-5 h-5" />
-      </a>
+      </Link>
     );
   };
 
@@ -760,10 +758,10 @@ const Index = () => {
                   ))}
                 </ul>
                 <Button variant="outline" className="w-full" asChild>
-                  <a href="https://pay.cakto.com.br/3bsu2vi_607441" target="_blank" rel="noopener noreferrer">
+                  <Link to="/precos">
                     Começar Agora
                     <ArrowRight className="ml-2 w-4 h-4" />
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </Card>
@@ -794,10 +792,10 @@ const Index = () => {
                   ))}
                 </ul>
                 <Button variant="cta" className="w-full" asChild>
-                  <a href="https://pay.cakto.com.br/u95r4cv_607505" target="_blank" rel="noopener noreferrer">
+                  <Link to="/precos">
                     Começar PRO Agora
                     <ArrowRight className="ml-2 w-4 h-4" />
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </Card>
