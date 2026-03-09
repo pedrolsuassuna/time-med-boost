@@ -758,10 +758,10 @@ const Index = () => {
                   ))}
                 </ul>
                 <Button variant="outline" className="w-full" asChild>
-                  <a href="https://pay.cakto.com.br/3bsu2vi_607441" target="_blank" rel="noopener noreferrer">
+                  <Link to="/precos">
                     Começar Agora
                     <ArrowRight className="ml-2 w-4 h-4" />
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </Card>
