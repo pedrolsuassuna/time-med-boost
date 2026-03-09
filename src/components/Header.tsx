@@ -107,9 +107,9 @@ const Header = () => {
               setIsMobileMenuOpen(false);
               trackEvent("cta_mobile_demo");
             }}>
-                  <a href="https://pay.cakto.com.br/u95r4cv_607505" target="_blank" rel="noopener noreferrer">
+                  <Link to="/precos" onClick={() => setIsMobileMenuOpen(false)}>
                     Testar MindMed PRO
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </div>
