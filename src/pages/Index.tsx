@@ -792,10 +792,10 @@ const Index = () => {
                   ))}
                 </ul>
                 <Button variant="cta" className="w-full" asChild>
-                  <a href="https://pay.cakto.com.br/u95r4cv_607505" target="_blank" rel="noopener noreferrer">
+                  <Link to="/precos">
                     Começar PRO Agora
                     <ArrowRight className="ml-2 w-4 h-4" />
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </Card>
