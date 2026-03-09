@@ -96,6 +96,19 @@ const Index = () => {
     }
   };
 
+  const handleCheckout = async (plan: "starter" | "pro") => {
+    setLoadingPlan(plan);
+    try {
+      trackEvent("cta_click", { plan });
+      await createCheckoutSession(STRIPE_PLANS[plan].price_id);
+    } catch (error) {
+      toast.error("Erro ao iniciar o checkout. Tente novamente.");
+      console.error(error);
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
   const featureCategories = [
     {
       title: "Assistente de Consulta (IA)",
