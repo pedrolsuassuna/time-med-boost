@@ -808,11 +808,12 @@ const Index = () => {
                     </li>
                   ))}
                 </ul>
-                <Button variant="cta" className="w-full" asChild>
-                  <Link to="/precos">
-                    Começar PRO Agora
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
+                <Button variant="cta" className="w-full" onClick={() => handleCheckout("pro")} disabled={loadingPlan === "pro"}>
+                  {loadingPlan === "pro" ? (
+                    <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</>
+                  ) : (
+                    <>Começar PRO Agora <ArrowRight className="ml-2 w-4 h-4" /></>
+                  )}
                 </Button>
               </div>
             </Card>
