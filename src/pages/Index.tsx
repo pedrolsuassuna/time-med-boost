@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -49,9 +49,13 @@ import {
   Target,
   Layers,
   Globe,
+  Loader2,
 } from "lucide-react";
+import { createCheckoutSession, STRIPE_PLANS } from "@/lib/stripe";
+import { toast } from "sonner";
 
 const Index = () => {
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState({
     hours: 23,
     minutes: 59,
@@ -89,6 +93,19 @@ const Index = () => {
         page_location: window.location.href,
         ...params,
       });
+    }
+  };
+
+  const handleCheckout = async (plan: "starter" | "pro") => {
+    setLoadingPlan(plan);
+    try {
+      trackEvent("cta_click", { plan });
+      await createCheckoutSession(STRIPE_PLANS[plan].price_id);
+    } catch (error) {
+      toast.error("Erro ao iniciar o checkout. Tente novamente.");
+      console.error(error);
+    } finally {
+      setLoadingPlan(null);
     }
   };
 
@@ -346,19 +363,18 @@ const Index = () => {
   ];
 
   const CTAButton = ({ className = "", size = "lg" as const, text = "Criar Minha Conta Agora" }) => {
-    const handleClick = () => {
-      trackEvent("cta_click");
-    };
-    
     return (
-      <Link 
-        to="/precos"
-        onClick={handleClick}
-        className={`inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 h-11 ${size === "lg" ? "h-12 px-10" : ""} ${className}`}
+      <button 
+        onClick={() => handleCheckout("pro")}
+        disabled={loadingPlan === "pro"}
+        className={`inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 h-11 ${size === "lg" ? "h-12 px-10" : ""} disabled:opacity-50 ${className}`}
       >
-        {text}
-        <ArrowRight className="w-5 h-5" />
-      </Link>
+        {loadingPlan === "pro" ? (
+          <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</>
+        ) : (
+          <>{text} <ArrowRight className="w-5 h-5" /></>
+        )}
+      </button>
     );
   };
 
@@ -757,11 +773,12 @@ const Index = () => {
                     </li>
                   ))}
                 </ul>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link to="/precos">
-                    Começar Agora
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
+                <Button variant="outline" className="w-full" onClick={() => handleCheckout("starter")} disabled={loadingPlan === "starter"}>
+                  {loadingPlan === "starter" ? (
+                    <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</>
+                  ) : (
+                    <>Começar Agora <ArrowRight className="ml-2 w-4 h-4" /></>
+                  )}
                 </Button>
               </div>
             </Card>
@@ -791,11 +808,12 @@ const Index = () => {
                     </li>
                   ))}
                 </ul>
-                <Button variant="cta" className="w-full" asChild>
-                  <Link to="/precos">
-                    Começar PRO Agora
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
+                <Button variant="cta" className="w-full" onClick={() => handleCheckout("pro")} disabled={loadingPlan === "pro"}>
+                  {loadingPlan === "pro" ? (
+                    <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</>
+                  ) : (
+                    <>Começar PRO Agora <ArrowRight className="ml-2 w-4 h-4" /></>
+                  )}
                 </Button>
               </div>
             </Card>

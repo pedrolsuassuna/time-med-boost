@@ -20,7 +20,7 @@ export async function createCheckoutSession(priceId: string) {
 
   if (error) throw new Error(error.message);
   if (data?.url) {
-    window.open(data.url, "_blank");
+    window.location.href = data.url;
   }
   return data;
 }
