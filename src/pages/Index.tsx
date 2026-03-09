@@ -55,6 +55,7 @@ import { createCheckoutSession, STRIPE_PLANS } from "@/lib/stripe";
 import { toast } from "sonner";
 
 const Index = () => {
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState({
     hours: 23,
     minutes: 59,
