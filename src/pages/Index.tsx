@@ -351,16 +351,14 @@ const Index = () => {
     };
     
     return (
-      <a 
-        href="https://pay.cakto.com.br/u95r4cv_607505" 
-        target="_blank" 
-        rel="noopener noreferrer"
+      <Link 
+        to="/precos"
         onClick={handleClick}
         className={`inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 h-11 ${size === "lg" ? "h-12 px-10" : ""} ${className}`}
       >
         {text}
         <ArrowRight className="w-5 h-5" />
-      </a>
+      </Link>
     );
   };
 
