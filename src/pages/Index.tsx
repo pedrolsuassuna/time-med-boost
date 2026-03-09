@@ -363,19 +363,18 @@ const Index = () => {
   ];
 
   const CTAButton = ({ className = "", size = "lg" as const, text = "Criar Minha Conta Agora" }) => {
-    const handleClick = () => {
-      trackEvent("cta_click");
-    };
-    
     return (
-      <Link 
-        to="/precos"
-        onClick={handleClick}
-        className={`inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 h-11 ${size === "lg" ? "h-12 px-10" : ""} ${className}`}
+      <button 
+        onClick={() => handleCheckout("pro")}
+        disabled={loadingPlan === "pro"}
+        className={`inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 h-11 ${size === "lg" ? "h-12 px-10" : ""} disabled:opacity-50 ${className}`}
       >
-        {text}
-        <ArrowRight className="w-5 h-5" />
-      </Link>
+        {loadingPlan === "pro" ? (
+          <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</>
+        ) : (
+          <>{text} <ArrowRight className="w-5 h-5" /></>
+        )}
+      </button>
     );
   };
 
