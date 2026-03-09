@@ -10,6 +10,8 @@ import { createCheckoutSession, STRIPE_PLANS } from "@/lib/stripe";
 import { toast } from "sonner";
 
 const Precos = () => {
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
   useEffect(() => {
     if (typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "pricing_view", {
@@ -17,6 +19,18 @@ const Precos = () => {
       });
     }
   }, []);
+
+  const handleCheckout = async (plan: "starter" | "pro") => {
+    setLoadingPlan(plan);
+    try {
+      await createCheckoutSession(STRIPE_PLANS[plan].price_id);
+    } catch (error) {
+      toast.error("Erro ao iniciar o checkout. Tente novamente.");
+      console.error(error);
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
 
   const starterFeatures = [
     "Gravação de áudio da consulta",
