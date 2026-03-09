@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { CheckCircle2, ArrowRight, X, Check, Sparkles } from "lucide-react";
+import { CheckCircle2, ArrowRight, X, Check, Sparkles, Loader2 } from "lucide-react";
+import { createCheckoutSession, STRIPE_PLANS } from "@/lib/stripe";
+import { toast } from "sonner";
 
 const Precos = () => {
   useEffect(() => {
