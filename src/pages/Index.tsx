@@ -773,11 +773,12 @@ const Index = () => {
                     </li>
                   ))}
                 </ul>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link to="/precos">
-                    Começar Agora
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
+                <Button variant="outline" className="w-full" onClick={() => handleCheckout("starter")} disabled={loadingPlan === "starter"}>
+                  {loadingPlan === "starter" ? (
+                    <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</>
+                  ) : (
+                    <>Começar Agora <ArrowRight className="ml-2 w-4 h-4" /></>
+                  )}
                 </Button>
               </div>
             </Card>
