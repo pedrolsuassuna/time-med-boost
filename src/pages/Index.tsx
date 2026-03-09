@@ -49,7 +49,10 @@ import {
   Target,
   Layers,
   Globe,
+  Loader2,
 } from "lucide-react";
+import { createCheckoutSession, STRIPE_PLANS } from "@/lib/stripe";
+import { toast } from "sonner";
 
 const Index = () => {
   const [timeLeft, setTimeLeft] = useState({
