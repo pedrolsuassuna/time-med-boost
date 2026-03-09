@@ -136,15 +136,17 @@ const Precos = () => {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full text-sm sm:text-base" variant="outline" asChild>
-                  <a
-                    href="https://pay.cakto.com.br/3bsu2vi_607441"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Começar Agora
-                    <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
-                  </a>
+                <Button
+                  className="w-full text-sm sm:text-base"
+                  variant="outline"
+                  onClick={() => handleCheckout("starter")}
+                  disabled={loadingPlan === "starter"}
+                >
+                  {loadingPlan === "starter" ? (
+                    <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</>
+                  ) : (
+                    <>Começar Agora <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" /></>
+                  )}
                 </Button>
               </div>
             </Card>
