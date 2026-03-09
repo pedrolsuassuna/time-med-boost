@@ -29,7 +29,6 @@ serve(async (req) => {
       apiVersion: "2025-08-27.basil",
     });
 
-    // Try to get authenticated user, but allow guest checkout
     if (authHeader) {
       const token = authHeader.replace("Bearer ", "");
       const { data } = await supabaseClient.auth.getUser(token);
@@ -42,7 +41,11 @@ serve(async (req) => {
       }
     }
 
-    const session = await stripe.checkout.sessions.create({
+    // Only Starter gets 7-day trial
+    const STARTER_PRICE_ID = "price_1T95efRpmClnFRZos0lGXwwj";
+    const isStarter = priceId === STARTER_PRICE_ID;
+
+    const sessionParams: any = {
       customer: customerId,
       customer_email: customerId ? undefined : customerEmail,
       line_items: [{ price: priceId, quantity: 1 }],
@@ -50,10 +53,13 @@ serve(async (req) => {
       success_url: `${req.headers.get("origin")}/precos?success=true`,
       cancel_url: `${req.headers.get("origin")}/precos?canceled=true`,
       allow_promotion_codes: true,
-      subscription_data: {
-        trial_period_days: 7,
-      },
-    });
+    };
+
+    if (isStarter) {
+      sessionParams.subscription_data = { trial_period_days: 7 };
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
