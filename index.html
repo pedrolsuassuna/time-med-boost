@@ -13,17 +13,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- SEO Meta Tags -->
-    
-    
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mindmed.com.br" />
     <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/iiiViKpKu9fWtIhiSfMR2Lxe6OV2/social-images/social-1760207881196-Letra ">
-
     <meta name="twitter:card" content="summary_large_image" />
-    
-    
     <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/iiiViKpKu9fWtIhiSfMR2Lxe6OV2/social-images/social-1760207881196-Letra ">
-    
     <link rel="canonical" href="https://mindmed.com.br" />
     
     <!-- Schema.org Structured Data -->
@@ -45,19 +39,105 @@
       }
     }
     </script>
-    
-  
-  
-  
-  <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/iiiViKpKu9fWtIhiSfMR2Lxe6OV2/uploads/1760207878299-Letra ">
-  <meta property="og:title" content="MindMed - Transforme Papelada em Faturamento | IA Médica">
-  <meta name="twitter:title" content="MindMed - Transforme Papelada em Faturamento | IA Médica">
-  <meta property="og:description" content="Economize até 2 horas diárias e atenda até 10 pacientes a mais por dia. IA médica que automatiza laudos e transcrições. Recupere seu tempo e aumente seu faturamento.">
-  <meta name="twitter:description" content="Economize até 2 horas diárias e atenda até 10 pacientes a mais por dia. IA médica que automatiza laudos e transcrições. Recupere seu tempo e aumente seu faturamento.">
-</head>
+
+    <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/iiiViKpKu9fWtIhiSfMR2Lxe6OV2/uploads/1760207878299-Letra ">
+    <meta property="og:title" content="MindMed - Transforme Papelada em Faturamento | IA Médica">
+    <meta name="twitter:title" content="MindMed - Transforme Papelada em Faturamento | IA Médica">
+    <meta property="og:description" content="Economize até 2 horas diárias e atenda até 10 pacientes a mais por dia. IA médica que automatiza laudos e transcrições. Recupere seu tempo e aumente seu faturamento.">
+    <meta name="twitter:description" content="Economize até 2 horas diárias e atenda até 10 pacientes a mais por dia. IA médica que automatiza laudos e transcrições. Recupere seu tempo e aumente seu faturamento.">
+
+    <!-- Critical CSS for instant FCP -->
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: hsl(210, 20%, 98%); color: hsl(215, 25%, 15%); }
+      #prerender-hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem 1rem;
+      }
+      #prerender-hero .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+      #prerender-hero .logo-icon {
+        width: 40px; height: 40px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, hsl(212, 85%, 28%), hsl(195, 85%, 55%));
+        display: flex; align-items: center; justify-content: center;
+        color: #fff; font-size: 1.5rem; font-weight: 700;
+      }
+      #prerender-hero .logo-text {
+        font-size: 1.25rem; font-weight: 700;
+        background: linear-gradient(to right, hsl(212, 85%, 28%), hsl(195, 75%, 48%));
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      #prerender-hero h1 {
+        font-size: clamp(1.75rem, 5vw, 3.5rem);
+        font-weight: 800;
+        line-height: 1.1;
+        max-width: 800px;
+        margin-bottom: 1rem;
+      }
+      #prerender-hero h1 span { color: hsl(195, 75%, 48%); }
+      #prerender-hero p {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        color: hsl(215, 15%, 45%);
+        max-width: 600px;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+      #prerender-hero .cta-btn {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        padding: 0.875rem 2rem;
+        background: linear-gradient(135deg, hsl(212, 85%, 28%), hsl(195, 85%, 55%));
+        color: #fff; font-weight: 600; font-size: 1rem;
+        border: none; border-radius: 9999px; cursor: pointer;
+        box-shadow: 0 4px 20px hsla(212, 85%, 28%, 0.3);
+      }
+      /* Hide prerender when React mounts */
+      #root:not(:empty) ~ #prerender-hero,
+      #root:not(:empty) + noscript { display: none; }
+    </style>
+  </head>
 
   <body>
     <div id="root"></div>
+
+    <!-- Pre-rendered hero for instant FCP & SEO crawlers -->
+    <div id="prerender-hero" aria-hidden="true">
+      <div class="logo">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">MindMed</span>
+      </div>
+      <h1>Transforme <span>Papelada</span> em Faturamento</h1>
+      <p>Economize até 2 horas diárias e atenda até 10 pacientes a mais por dia. IA médica que automatiza laudos e transcrições.</p>
+      <button class="cta-btn" onclick="window.location.href='/precos'">Começar Agora</button>
+    </div>
+
+    <!-- Noscript fallback with real content for SEO -->
+    <noscript>
+      <div style="max-width:800px;margin:4rem auto;padding:2rem;font-family:Inter,sans-serif;text-align:center;">
+        <h1>MindMed - Transforme Papelada em Faturamento</h1>
+        <p>Economize até 2 horas diárias e atenda até 10 pacientes a mais por dia. IA médica que automatiza laudos, transcrições e prontuários eletrônicos.</p>
+        <h2>Funcionalidades</h2>
+        <ul style="text-align:left;max-width:500px;margin:1rem auto;">
+          <li>Transcrição automática de consultas com IA</li>
+          <li>Geração automática de laudos médicos</li>
+          <li>Prontuário eletrônico inteligente</li>
+          <li>Receituário digital completo</li>
+          <li>Integração com sistemas hospitalares</li>
+        </ul>
+        <p><a href="https://mindmed.online">Acesse o MindMed</a></p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
