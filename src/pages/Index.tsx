@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,32 +26,35 @@ import {
   Check,
   Award,
   Users,
-  Timer,
   Gift,
   ShieldCheck,
   Sparkles,
-  Stethoscope,
   Brain,
-  Image,
-  FileSignature,
+  Camera,
+  Pill,
   UserCircle,
   LayoutDashboard,
-  Activity,
   LineChart,
-  Pill,
-  Camera,
-  History,
-  Download,
-  Smartphone,
-  Monitor,
-  HeartPulse,
-  Target,
   Layers,
   Globe,
   Loader2,
+  Monitor,
+  Smartphone,
+  HeartPulse,
+  Target,
 } from "lucide-react";
 import { createCheckoutSession, STRIPE_PLANS } from "@/lib/stripe";
 import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Lazy load below-the-fold heavy component
+const FinancialCalculator = lazy(() => import("@/components/FinancialCalculator"));
+
+const CalculatorSkeleton = () => (
+  <div className="w-full max-w-5xl mx-auto">
+    <Skeleton className="w-full h-[400px] rounded-lg" />
+  </div>
+);
 
 const Index = () => {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
@@ -367,7 +369,7 @@ const Index = () => {
       <button 
         onClick={() => handleCheckout("pro")}
         disabled={loadingPlan === "pro"}
-        className={`inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 h-11 ${size === "lg" ? "h-12 px-10" : ""} disabled:opacity-50 ${className}`}
+        className={`inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-hover text-cta-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base sm:text-lg rounded-full px-8 min-h-[44px] h-11 ${size === "lg" ? "h-12 px-10" : ""} disabled:opacity-50 ${className}`}
       >
         {loadingPlan === "pro" ? (
           <><Loader2 className="w-5 h-5 animate-spin" /> Processando...</>
@@ -406,15 +408,15 @@ const Index = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 pt-6 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-cta" />
+                <CheckCircle2 className="w-5 h-5 text-cta flex-shrink-0" />
                 <span>7 dias grátis</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-cta" />
+                <CheckCircle2 className="w-5 h-5 text-cta flex-shrink-0" />
                 <span>Cancele quando quiser</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-cta" />
+                <CheckCircle2 className="w-5 h-5 text-cta flex-shrink-0" />
                 <span>100% LGPD</span>
               </div>
             </div>
@@ -425,7 +427,7 @@ const Index = () => {
       {/* Stats Bar */}
       <section className="py-8 sm:py-12 bg-primary text-primary-foreground">
         <div className="container-custom px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary mb-1">
@@ -439,7 +441,7 @@ const Index = () => {
       </section>
 
       {/* Platform Description */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-background">
+      <section className="py-12 sm:py-16 lg:py-24 bg-background">
         <div className="container-custom px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">
@@ -448,26 +450,26 @@ const Index = () => {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">
               A MindMed é uma IA médica completa
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
               Grava sua consulta, interpreta as informações, <strong className="text-foreground">analisa imagens</strong>, compara com laudos anteriores e entrega um documento profissional pronto para o prontuário. Totalmente segura, rápida e com <strong className="text-foreground">embasamento teórico clínico-científico</strong>.
             </p>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/50">
-                <Monitor className="w-6 h-6 text-primary flex-shrink-0" />
-                <span className="text-sm font-medium">Computador</span>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-8 sm:mt-12">
+              <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-muted/50">
+                <Monitor className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium">Computador</span>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/50">
-                <Smartphone className="w-6 h-6 text-primary flex-shrink-0" />
-                <span className="text-sm font-medium">Celular</span>
+              <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-muted/50">
+                <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium">Celular</span>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/50">
-                <Shield className="w-6 h-6 text-cta flex-shrink-0" />
-                <span className="text-sm font-medium">100% Seguro</span>
+              <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-muted/50">
+                <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-cta flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium">100% Seguro</span>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/50">
-                <Zap className="w-6 h-6 text-secondary flex-shrink-0" />
-                <span className="text-sm font-medium">Ultra Rápido</span>
+              <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl bg-muted/50">
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-secondary flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium">Ultra Rápido</span>
               </div>
             </div>
           </div>
@@ -475,9 +477,9 @@ const Index = () => {
       </section>
 
       {/* Features Sections */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-subtle">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
         <div className="container-custom px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <Badge variant="secondary" className="mb-4">
               Funcionalidades
             </Badge>
@@ -486,21 +488,20 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {featureCategories.map((category, index) => (
               <Card
                 key={index}
-                className="card-premium overflow-hidden animate-fade-in-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="card-premium overflow-hidden"
               >
                 <div className={`h-2 bg-gradient-to-r ${category.color}`} />
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center`}>
-                      <category.icon className="w-6 h-6 text-primary-foreground" />
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center flex-shrink-0`}>
+                      <category.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
                     </div>
-                    <div>
-                      <h3 className="text-lg font-bold">{category.title}</h3>
+                    <div className="min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold truncate">{category.title}</h3>
                       {category.badge && (
                         <Badge className={`${category.badgeColor} text-primary-foreground text-xs mt-1`}>
                           {category.badge}
@@ -529,9 +530,9 @@ const Index = () => {
       </section>
 
       {/* Differentiators Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-primary text-primary-foreground">
+      <section className="py-12 sm:py-16 lg:py-24 bg-primary text-primary-foreground">
         <div className="container-custom px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <Badge className="bg-secondary text-secondary-foreground mb-4">
               Diferenciais
             </Badge>
@@ -540,17 +541,16 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
             {differentiators.map((item, index) => (
               <div
                 key={index}
-                className="flex items-start gap-4 p-5 rounded-xl bg-primary-foreground/10 hover:bg-primary-foreground/15 transition-colors animate-fade-in-up"
-                style={{ animationDelay: `${index * 50}ms` }}
+                className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-primary-foreground/10 hover:bg-primary-foreground/15 transition-colors"
               >
-                <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-5 h-5 text-secondary" />
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                  <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-secondary" />
                 </div>
-                <p className="text-sm sm:text-base font-medium pt-2">{item.text}</p>
+                <p className="text-sm sm:text-base font-medium pt-1.5 sm:pt-2">{item.text}</p>
               </div>
             ))}
           </div>
@@ -558,9 +558,9 @@ const Index = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-background">
+      <section className="py-12 sm:py-16 lg:py-24 bg-background">
         <div className="container-custom px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <Badge variant="secondary" className="mb-4">
               Como Funciona
             </Badge>
@@ -569,25 +569,24 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
             {howItWorks.map((step, index) => (
               <div
                 key={index}
-                className="relative animate-fade-in-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="relative"
               >
                 <Card className="card-premium text-center h-full">
-                  <div className="p-6 space-y-4">
+                  <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
                     <div className="relative inline-block">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-glow">
-                        <step.icon className="w-8 h-8 text-primary-foreground" />
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-glow">
+                        <step.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary-foreground" />
                       </div>
-                      <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-cta flex items-center justify-center text-sm font-bold text-cta-foreground">
+                      <div className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-cta flex items-center justify-center text-xs sm:text-sm font-bold text-cta-foreground">
                         {step.step}
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                    <h3 className="text-sm sm:text-lg font-semibold">{step.title}</h3>
+                    <p className="text-xs sm:text-sm text-muted-foreground">{step.description}</p>
                   </div>
                 </Card>
                 {index < howItWorks.length - 1 && (
@@ -600,29 +599,29 @@ const Index = () => {
       </section>
 
       {/* Video/Demo Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-subtle">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
         <div className="container-custom px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
             <Badge variant="secondary" className="mb-4">
               Demonstração
             </Badge>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
               Veja a MindMed em ação
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground">
               Assista como médicos estão transformando suas rotinas
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-primary to-primary-light shadow-2xl">
+            <div className="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-br from-primary to-primary-light shadow-2xl">
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-primary-foreground space-y-4">
-                  <div className="w-20 h-20 mx-auto rounded-full bg-cta/90 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform shadow-lg">
-                    <Play className="w-10 h-10 text-cta-foreground ml-1" />
+                <div className="text-center text-primary-foreground space-y-3 sm:space-y-4">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-cta/90 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform shadow-lg">
+                    <Play className="w-8 h-8 sm:w-10 sm:h-10 text-cta-foreground ml-1" />
                   </div>
-                  <p className="text-lg font-medium">Clique para assistir</p>
-                  <p className="text-sm text-primary-foreground/70">
+                  <p className="text-base sm:text-lg font-medium">Clique para assistir</p>
+                  <p className="text-xs sm:text-sm text-primary-foreground/70 px-4">
                     Médico gravando → IA analisando → Laudo + Receituário prontos
                   </p>
                 </div>
@@ -633,9 +632,9 @@ const Index = () => {
       </section>
 
       {/* Social Proof / Testimonials */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-background">
+      <section className="py-12 sm:py-16 lg:py-24 bg-background">
         <div className="container-custom px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <Badge variant="secondary" className="mb-4">
               Depoimentos
             </Badge>
@@ -644,24 +643,23 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
             {testimonials.map((testimonial, index) => (
               <Card
                 key={index}
-                className="card-premium animate-fade-in-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="card-premium"
               >
-                <div className="p-6 space-y-4">
+                <div className="p-4 sm:p-6 space-y-4">
                   <div className="flex gap-1">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
+                      <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-secondary text-secondary" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground italic">"{testimonial.text}"</p>
+                  <p className="text-sm sm:text-base text-muted-foreground italic">"{testimonial.text}"</p>
                   <div className="pt-4 border-t border-border">
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.specialty}</p>
-                    <Badge variant="secondary" className="mt-2">
+                    <p className="font-semibold text-sm sm:text-base">{testimonial.name}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">{testimonial.specialty}</p>
+                    <Badge variant="secondary" className="mt-2 text-xs">
                       {testimonial.metric}
                     </Badge>
                   </div>
@@ -671,23 +669,23 @@ const Index = () => {
           </div>
 
           {/* Authority Badges */}
-          <div className="flex flex-wrap justify-center gap-6 mt-12">
-            <div className="flex items-center gap-3 bg-card px-6 py-3 rounded-full shadow-md">
-              <Award className="w-6 h-6 text-secondary" />
-              <span className="font-semibold">+1.500 laudos gerados</span>
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-6 mt-8 sm:mt-12">
+            <div className="flex items-center justify-center gap-3 bg-card px-4 sm:px-6 py-3 rounded-full shadow-md">
+              <Award className="w-5 h-5 sm:w-6 sm:h-6 text-secondary flex-shrink-0" />
+              <span className="font-semibold text-sm sm:text-base">+1.500 laudos gerados</span>
             </div>
-            <div className="flex items-center gap-3 bg-card px-6 py-3 rounded-full shadow-md">
-              <Sparkles className="w-6 h-6 text-secondary" />
-              <span className="font-semibold">99% de precisão com IA</span>
+            <div className="flex items-center justify-center gap-3 bg-card px-4 sm:px-6 py-3 rounded-full shadow-md">
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-secondary flex-shrink-0" />
+              <span className="font-semibold text-sm sm:text-base">99% de precisão com IA</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Before/After Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-subtle">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
         <div className="container-custom px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <Badge variant="secondary" className="mb-4">
               Transformação
             </Badge>
@@ -696,21 +694,21 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
             {/* Before */}
             <Card className="border-destructive/30 bg-destructive/5">
-              <div className="p-6 sm:p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-destructive/20 flex items-center justify-center">
-                    <X className="w-6 h-6 text-destructive" />
+              <div className="p-4 sm:p-6 lg:p-8">
+                <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-destructive/20 flex items-center justify-center flex-shrink-0">
+                    <X className="w-5 h-5 sm:w-6 sm:h-6 text-destructive" />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-destructive">ANTES</h3>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-destructive">ANTES</h3>
                 </div>
-                <ul className="space-y-4">
+                <ul className="space-y-3 sm:space-y-4">
                   {beforeAfter.before.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <X className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
-                      <span className="text-muted-foreground">{item}</span>
+                    <li key={i} className="flex items-start gap-2 sm:gap-3">
+                      <X className="w-4 h-4 sm:w-5 sm:h-5 text-destructive mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-muted-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -719,18 +717,18 @@ const Index = () => {
 
             {/* After */}
             <Card className="border-cta/30 bg-cta/5 shadow-glow">
-              <div className="p-6 sm:p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-cta/20 flex items-center justify-center">
-                    <Check className="w-6 h-6 text-cta" />
+              <div className="p-4 sm:p-6 lg:p-8">
+                <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cta/20 flex items-center justify-center flex-shrink-0">
+                    <Check className="w-5 h-5 sm:w-6 sm:h-6 text-cta" />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-cta">COM MINDMED</h3>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-cta">COM MINDMED</h3>
                 </div>
-                <ul className="space-y-4">
+                <ul className="space-y-3 sm:space-y-4">
                   {beforeAfter.after.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-cta mt-0.5 flex-shrink-0" />
-                      <span className="font-medium">{item}</span>
+                    <li key={i} className="flex items-start gap-2 sm:gap-3">
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-cta mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base font-medium">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -741,9 +739,9 @@ const Index = () => {
       </section>
 
       {/* Plans Comparison Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-background">
+      <section className="py-12 sm:py-16 lg:py-24 bg-background">
         <div className="container-custom px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <Badge variant="secondary" className="mb-4">
               Planos
             </Badge>
@@ -752,28 +750,28 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto mb-8 sm:mb-12">
             {/* Starter Plan */}
             <Card className="card-premium">
-              <div className="p-6 sm:p-8 space-y-6">
+              <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
                 <div>
                   <Badge className="bg-muted text-foreground mb-3">STARTER</Badge>
-                  <h3 className="text-2xl font-bold mb-2">Plano Starter</h3>
-                  <p className="text-muted-foreground">Ideal para médicos que querem começar</p>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">Plano Starter</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">Ideal para médicos que querem começar</p>
                 </div>
-                <div className="py-4">
-                  <span className="text-4xl sm:text-5xl font-bold">R$ 99,90</span>
-                  <span className="text-muted-foreground">/mês</span>
+                <div className="py-3 sm:py-4">
+                  <span className="text-3xl sm:text-4xl lg:text-5xl font-bold">R$ 99,90</span>
+                  <span className="text-sm sm:text-base text-muted-foreground">/mês</span>
                 </div>
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   {starterFeatures.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-cta mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{feature}</span>
+                      <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-cta mt-0.5 flex-shrink-0" />
+                      <span className="text-xs sm:text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <Button variant="outline" className="w-full" onClick={() => handleCheckout("starter")} disabled={loadingPlan === "starter"}>
+                <Button variant="outline" className="w-full min-h-[44px]" onClick={() => handleCheckout("starter")} disabled={loadingPlan === "starter"}>
                   {loadingPlan === "starter" ? (
                     <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</>
                   ) : (
@@ -790,25 +788,25 @@ const Index = () => {
                   MAIS POPULAR
                 </Badge>
               </div>
-              <div className="p-6 sm:p-8 space-y-6">
+              <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
                 <div>
                   <Badge className="bg-primary text-primary-foreground mb-3">PRO</Badge>
-                  <h3 className="text-2xl font-bold mb-2">Plano PRO</h3>
-                  <p className="text-muted-foreground">Para médicos que querem máxima performance</p>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">Plano PRO</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">Para médicos que querem máxima performance</p>
                 </div>
-                <div className="py-4">
-                  <span className="text-4xl sm:text-5xl font-bold">R$ 299</span>
-                  <span className="text-muted-foreground">/mês</span>
+                <div className="py-3 sm:py-4">
+                  <span className="text-3xl sm:text-4xl lg:text-5xl font-bold">R$ 299</span>
+                  <span className="text-sm sm:text-base text-muted-foreground">/mês</span>
                 </div>
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   {proFeatures.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className={`w-5 h-5 mt-0.5 flex-shrink-0 ${i === 0 ? 'text-secondary' : 'text-cta'}`} />
-                      <span className={`text-sm ${i === 0 ? 'font-semibold text-secondary' : ''}`}>{feature}</span>
+                      <CheckCircle2 className={`w-4 h-4 sm:w-5 sm:h-5 mt-0.5 flex-shrink-0 ${i === 0 ? 'text-secondary' : 'text-cta'}`} />
+                      <span className={`text-xs sm:text-sm ${i === 0 ? 'font-semibold text-secondary' : ''}`}>{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <Button variant="cta" className="w-full" onClick={() => handleCheckout("pro")} disabled={loadingPlan === "pro"}>
+                <Button variant="cta" className="w-full min-h-[44px]" onClick={() => handleCheckout("pro")} disabled={loadingPlan === "pro"}>
                   {loadingPlan === "pro" ? (
                     <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</>
                   ) : (
@@ -821,33 +819,33 @@ const Index = () => {
 
           {/* Comparison Table */}
           <Card className="card-premium max-w-4xl mx-auto overflow-hidden">
-            <div className="p-6 sm:p-8">
-              <h3 className="text-xl font-bold mb-6 text-center">Comparativo Completo</h3>
-              <div className="overflow-x-auto">
-                <table className="w-full">
+            <div className="p-4 sm:p-6 lg:p-8">
+              <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-center">Comparativo Completo</h3>
+              <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                <table className="w-full min-w-[400px]">
                   <thead>
                     <tr className="border-b border-border">
-                      <th className="text-left py-3 px-4 font-semibold">Funcionalidade</th>
-                      <th className="text-center py-3 px-4 font-semibold">Starter</th>
-                      <th className="text-center py-3 px-4 font-semibold text-secondary">PRO</th>
+                      <th className="text-left py-2.5 sm:py-3 px-2 sm:px-4 font-semibold text-sm sm:text-base">Funcionalidade</th>
+                      <th className="text-center py-2.5 sm:py-3 px-2 sm:px-4 font-semibold text-sm sm:text-base">Starter</th>
+                      <th className="text-center py-2.5 sm:py-3 px-2 sm:px-4 font-semibold text-sm sm:text-base text-secondary">PRO</th>
                     </tr>
                   </thead>
                   <tbody>
                     {comparisonTable.map((row, i) => (
                       <tr key={i} className="border-b border-border/50">
-                        <td className="py-3 px-4 text-sm">{row.feature}</td>
-                        <td className="py-3 px-4 text-center">
+                        <td className="py-2.5 sm:py-3 px-2 sm:px-4 text-xs sm:text-sm">{row.feature}</td>
+                        <td className="py-2.5 sm:py-3 px-2 sm:px-4 text-center">
                           {row.starter ? (
-                            <Check className="w-5 h-5 text-cta mx-auto" />
+                            <Check className="w-4 h-4 sm:w-5 sm:h-5 text-cta mx-auto" />
                           ) : (
-                            <X className="w-5 h-5 text-muted-foreground/50 mx-auto" />
+                            <X className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground/50 mx-auto" />
                           )}
                         </td>
-                        <td className="py-3 px-4 text-center">
+                        <td className="py-2.5 sm:py-3 px-2 sm:px-4 text-center">
                           {row.pro ? (
-                            <Check className="w-5 h-5 text-secondary mx-auto" />
+                            <Check className="w-4 h-4 sm:w-5 sm:h-5 text-secondary mx-auto" />
                           ) : (
-                            <X className="w-5 h-5 text-muted-foreground/50 mx-auto" />
+                            <X className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground/50 mx-auto" />
                           )}
                         </td>
                       </tr>
@@ -860,33 +858,50 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Free Trial CTA */}
-      <section className="py-16 sm:py-20 bg-gradient-to-r from-secondary/20 via-cta/20 to-secondary/20">
+      {/* Financial Calculator - Lazy Loaded */}
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
         <div className="container-custom px-4">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <Badge variant="secondary" className="mb-4">
+              Calculadora
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+              Descubra quanto você pode ganhar a mais
+            </h2>
+          </div>
+          <Suspense fallback={<CalculatorSkeleton />}>
+            <FinancialCalculator />
+          </Suspense>
+        </div>
+      </section>
+
+      {/* Free Trial CTA */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-secondary/20 via-cta/20 to-secondary/20">
+        <div className="container-custom px-4">
+          <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
               Teste a MindMed por 7 dias — zero risco.
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground">
               Comece agora e veja a diferença na sua rotina médica
             </p>
-            <CTAButton className="text-xl px-12" />
+            <CTAButton className="text-lg sm:text-xl px-8 sm:px-12" />
           </div>
         </div>
       </section>
 
       {/* Guarantee Section */}
-      <section className="py-12 sm:py-16 bg-cta/10">
+      <section className="py-10 sm:py-12 lg:py-16 bg-cta/10">
         <div className="container-custom px-4">
-          <div className="max-w-3xl mx-auto text-center flex flex-col sm:flex-row items-center justify-center gap-6">
-            <div className="w-20 h-20 rounded-full bg-cta/20 flex items-center justify-center flex-shrink-0">
-              <ShieldCheck className="w-10 h-10 text-cta" />
+          <div className="max-w-3xl mx-auto text-center sm:text-left flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-cta/20 flex items-center justify-center flex-shrink-0">
+              <ShieldCheck className="w-8 h-8 sm:w-10 sm:h-10 text-cta" />
             </div>
-            <div className="text-left">
-              <h3 className="text-xl sm:text-2xl font-bold mb-2">
+            <div>
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2">
                 Você pode cancelar quando quiser. Sem riscos.
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-sm sm:text-base text-muted-foreground">
                 Não gostou? Cancele a qualquer momento sem multas ou burocracias. Sua satisfação é
                 nossa prioridade.
               </p>
@@ -896,9 +911,9 @@ const Index = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-background">
+      <section className="py-12 sm:py-16 lg:py-24 bg-background">
         <div className="container-custom px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <Badge variant="secondary" className="mb-4">
               Dúvidas Frequentes
             </Badge>
@@ -908,17 +923,17 @@ const Index = () => {
           </div>
 
           <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-4">
+            <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
               {faqs.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="bg-card border border-border rounded-xl px-6 shadow-sm"
+                  className="bg-card border border-border rounded-xl px-4 sm:px-6 shadow-sm"
                 >
-                  <AccordionTrigger className="text-left font-semibold hover:text-secondary">
+                  <AccordionTrigger className="text-left font-semibold hover:text-secondary text-sm sm:text-base py-3 sm:py-4">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
+                  <AccordionContent className="text-sm sm:text-base text-muted-foreground pb-3 sm:pb-4">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -929,36 +944,36 @@ const Index = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-primary text-primary-foreground relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-primary text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-secondary/20 via-transparent to-transparent" />
         <div className="container-custom px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
+          <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
               A MindMed não é apenas uma ferramenta.
             </h2>
-            <p className="text-lg sm:text-xl text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed">
               É sua nova assistente clínica — sempre presente, precisa e totalmente automática.
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
-              <div className="text-center p-4">
-                <Users className="w-8 h-8 text-secondary mx-auto mb-2" />
-                <p className="font-medium">Atenda mais pacientes</p>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 py-4 sm:py-8">
+              <div className="text-center p-3 sm:p-4">
+                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mx-auto mb-2" />
+                <p className="font-medium text-xs sm:text-base">Atenda mais pacientes</p>
               </div>
-              <div className="text-center p-4">
-                <DollarSign className="w-8 h-8 text-secondary mx-auto mb-2" />
-                <p className="font-medium">Ganhe mais dinheiro</p>
+              <div className="text-center p-3 sm:p-4">
+                <DollarSign className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mx-auto mb-2" />
+                <p className="font-medium text-xs sm:text-base">Ganhe mais dinheiro</p>
               </div>
-              <div className="text-center p-4">
-                <HeartPulse className="w-8 h-8 text-secondary mx-auto mb-2" />
-                <p className="font-medium">Reduza estresse</p>
+              <div className="text-center p-3 sm:p-4">
+                <HeartPulse className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mx-auto mb-2" />
+                <p className="font-medium text-xs sm:text-base">Reduza estresse</p>
               </div>
-              <div className="text-center p-4">
-                <Target className="w-8 h-8 text-secondary mx-auto mb-2" />
-                <p className="font-medium">Evolua sua prática</p>
+              <div className="text-center p-3 sm:p-4">
+                <Target className="w-6 h-6 sm:w-8 sm:h-8 text-secondary mx-auto mb-2" />
+                <p className="font-medium text-xs sm:text-base">Evolua sua prática</p>
               </div>
             </div>
-            <CTAButton className="text-xl px-12 py-6 h-auto" />
-            <p className="text-sm text-primary-foreground/60 mt-4">
+            <CTAButton className="text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-6 h-auto" />
+            <p className="text-xs sm:text-sm text-primary-foreground/60 mt-4">
               Pagamento seguro • 7 dias grátis • Cancele quando quiser
             </p>
           </div>
