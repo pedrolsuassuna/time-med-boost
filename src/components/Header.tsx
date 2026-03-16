@@ -16,7 +16,7 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -68,29 +68,29 @@ const Header = () => {
             <Button variant="ghost" asChild className="hover:bg-secondary-muted">
               <a href="https://acesso.mindmed.online" target="_blank" rel="noopener noreferrer">Entrar</a>
             </Button>
-            <Button variant="cta" className="rounded-full px-6 shadow-lg hover:shadow-xl" onClick={handleCheckout} disabled={loading}>
+            <Button variant="cta" className="rounded-full px-6 shadow-lg hover:shadow-xl min-h-[44px]" onClick={handleCheckout} disabled={loading}>
               {loading ? <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</> : "Testar MindMed PRO"}
             </Button>
           </div>
 
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-1.5 sm:p-2 rounded-md hover:bg-muted transition-colors" aria-label="Toggle menu">
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md hover:bg-muted transition-colors" aria-label="Toggle menu">
             {isMobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
         </div>
 
         {isMobileMenuOpen && (
           <div className="lg:hidden py-3 sm:py-4 border-t border-border animate-fade-in bg-background">
-            <div className="flex flex-col gap-2 sm:gap-4">
-              <Link to="/" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Início</Link>
-              <Link to="/produto" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/produto") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Produto</Link>
-              <Link to="/solucoes" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/solucoes") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Soluções</Link>
-              <Link to="/precos" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/precos") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Preços</Link>
-              <Link to="/recursos" className={cn("px-4 py-2 text-sm font-medium rounded-md transition-colors", isActive("/recursos") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Recursos</Link>
+            <div className="flex flex-col gap-1 sm:gap-2">
+              <Link to="/" className={cn("px-4 py-3 text-sm font-medium rounded-md transition-colors min-h-[44px] flex items-center", isActive("/") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Início</Link>
+              <Link to="/produto" className={cn("px-4 py-3 text-sm font-medium rounded-md transition-colors min-h-[44px] flex items-center", isActive("/produto") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Produto</Link>
+              <Link to="/solucoes" className={cn("px-4 py-3 text-sm font-medium rounded-md transition-colors min-h-[44px] flex items-center", isActive("/solucoes") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Soluções</Link>
+              <Link to="/precos" className={cn("px-4 py-3 text-sm font-medium rounded-md transition-colors min-h-[44px] flex items-center", isActive("/precos") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Preços</Link>
+              <Link to="/recursos" className={cn("px-4 py-3 text-sm font-medium rounded-md transition-colors min-h-[44px] flex items-center", isActive("/recursos") ? "bg-secondary-muted text-secondary" : "hover:bg-muted")} onClick={() => setIsMobileMenuOpen(false)}>Recursos</Link>
               <div className="flex flex-col gap-2 px-4 pt-3 sm:pt-4 border-t border-border">
-                <Button variant="outline" asChild className="w-full text-sm">
+                <Button variant="outline" asChild className="w-full text-sm min-h-[44px]">
                   <a href="https://acesso.mindmed.online" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>Entrar</a>
                 </Button>
-                <Button variant="cta" className="w-full text-sm rounded-full" onClick={() => { setIsMobileMenuOpen(false); handleCheckout(); }} disabled={loading}>
+                <Button variant="cta" className="w-full text-sm rounded-full min-h-[44px]" onClick={() => { setIsMobileMenuOpen(false); handleCheckout(); }} disabled={loading}>
                   {loading ? <><Loader2 className="mr-2 w-4 h-4 animate-spin" /> Processando...</> : "Testar MindMed PRO"}
                 </Button>
               </div>

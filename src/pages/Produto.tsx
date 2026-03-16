@@ -5,8 +5,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Mic, FileText, Zap, Lock, BarChart3, Cloud, Database, Plug, Shield, CheckCircle2, ArrowRight, Stethoscope, Brain, Languages } from "lucide-react";
-import dashboardMockup from "@/assets/dashboard-mockup.jpg";
+import { Mic, FileText, Lock, Cloud, Database, Plug, Shield, CheckCircle2, ArrowRight, Brain, Languages } from "lucide-react";
+
 const Produto = () => {
   useEffect(() => {
     if (typeof window !== "undefined" && (window as any).gtag) {
@@ -16,6 +16,7 @@ const Produto = () => {
       });
     }
   }, []);
+
   const features = [{
     icon: Mic,
     title: "Transcrição Médica Inteligente",
@@ -37,6 +38,7 @@ const Produto = () => {
     description: "Transcrição e tradução em tempo real. Atenda pacientes internacionais sem barreiras linguísticas.",
     benefits: ["Português, Inglês, Espanhol", "Tradução simultânea", "Manutenção de termos técnicos", "Exportação bilíngue"]
   }];
+
   const integrations = [{
     name: "Prontuários Eletrônicos",
     description: "Integração nativa com principais EMRs do mercado",
@@ -50,6 +52,7 @@ const Produto = () => {
     description: "Compartilhamento seguro com equipe e pacientes",
     systems: ["WhatsApp", "Email", "SMS", "Portal do Paciente"]
   }];
+
   const security = [{
     icon: Lock,
     title: "Criptografia de Ponta",
@@ -67,7 +70,9 @@ const Produto = () => {
     title: "Backup Automático",
     description: "Redundância geográfica. Seus dados sempre seguros e disponíveis."
   }];
-  return <div className="min-h-screen">
+
+  return (
+    <div className="min-h-screen">
       <Header />
 
       {/* Hero */}
@@ -85,13 +90,13 @@ const Produto = () => {
               seus pacientes
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow text-base sm:text-lg w-full sm:w-auto" asChild>
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow text-base sm:text-lg w-full sm:w-auto min-h-[44px]" asChild>
                 <Link to="/contato">
                   Solicitar Demo
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto" asChild>
+              <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto min-h-[44px]" asChild>
                 <Link to="/precos">Ver Preços</Link>
               </Button>
             </div>
@@ -100,10 +105,17 @@ const Produto = () => {
       </section>
 
       {/* Dashboard Preview */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-background">
+      <section className="py-8 sm:py-12 lg:py-20 bg-background">
         <div className="container-custom px-4">
           <div className="max-w-6xl mx-auto">
-            <img alt="Interface do MindMed" className="w-full rounded-xl sm:rounded-2xl shadow-2xl border border-border" src="/lovable-uploads/e664a159-c33d-4f96-987e-5b939253389c.png" />
+            <img
+              alt="Interface do MindMed"
+              className="w-full rounded-xl sm:rounded-2xl shadow-2xl border border-border"
+              src="/lovable-uploads/e664a159-c33d-4f96-987e-5b939253389c.png"
+              loading="lazy"
+              width="1200"
+              height="675"
+            />
           </div>
         </div>
       </section>
@@ -111,107 +123,117 @@ const Produto = () => {
       {/* Features */}
       <section id="transcricao" className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
         <div className="container-custom px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl">Recursos Principais</h2>
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
               Tecnologia de ponta para automatizar cada etapa do seu atendimento
             </p>
           </div>
 
-          <div className="space-y-12 lg:space-y-16">
-            {features.map((feature, index) => <div key={index} className={`grid md:grid-cols-2 gap-8 lg:gap-12 items-center ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
+          <div className="space-y-8 sm:space-y-12 lg:space-y-16">
+            {features.map((feature, index) => (
+              <div key={index} className={`grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
                 <div className={index % 2 === 1 ? "md:order-2" : ""}>
                   <Card className="card-premium">
-                    <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
-                      <div className="inline-flex w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-secondary/10 items-center justify-center">
-                        <feature.icon className="w-7 h-7 sm:w-8 sm:h-8 text-secondary" />
+                    <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
+                      <div className="inline-flex w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full bg-secondary/10 items-center justify-center">
+                        <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-secondary" />
                       </div>
-                      <h3 className="text-xl sm:text-2xl font-bold">{feature.title}</h3>
-                      <p className="text-base sm:text-lg text-muted-foreground">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold">{feature.title}</h3>
+                      <p className="text-sm sm:text-base lg:text-lg text-muted-foreground">
                         {feature.description}
                       </p>
-                      <ul className="space-y-3">
-                        {feature.benefits.map((benefit, i) => <li key={i} className="flex items-start gap-3">
-                            <CheckCircle2 className="w-5 h-5 text-success mt-0.5 flex-shrink-0" />
+                      <ul className="space-y-2 sm:space-y-3">
+                        {feature.benefits.map((benefit, i) => (
+                          <li key={i} className="flex items-start gap-2 sm:gap-3">
+                            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-success mt-0.5 flex-shrink-0" />
                             <span className="text-sm sm:text-base">{benefit}</span>
-                          </li>)}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </Card>
                 </div>
                 <div className={index % 2 === 1 ? "md:order-1" : ""}>
                   <div className="aspect-video bg-gradient-primary rounded-xl sm:rounded-2xl flex items-center justify-center shadow-glow">
-                    <feature.icon className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-primary-foreground opacity-50" />
+                    <feature.icon className="w-12 h-12 sm:w-16 sm:h-16 lg:w-24 lg:h-24 text-primary-foreground opacity-50" />
                   </div>
                 </div>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Integrations */}
-      <section id="integracao" className="section-padding bg-background">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+      <section id="integracao" className="py-12 sm:py-16 lg:py-24 bg-background">
+        <div className="container-custom px-4">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <Badge variant="secondary" className="mb-4">
               Integrações
             </Badge>
-            <h2 className="mb-4">Conecte com suas ferramentas favoritas</h2>
-            <p className="text-xl text-muted-foreground">
+            <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl">Conecte com suas ferramentas favoritas</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
               Integração nativa com os principais sistemas do mercado
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {integrations.map((integration, index) => <Card key={index} className="card-premium">
-                <div className="p-8 space-y-6">
-                  <div className="inline-flex w-14 h-14 rounded-full bg-secondary/10 items-center justify-center">
-                    <Plug className="w-7 h-7 text-secondary" />
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            {integrations.map((integration, index) => (
+              <Card key={index} className="card-premium">
+                <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
+                  <div className="inline-flex w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-secondary/10 items-center justify-center">
+                    <Plug className="w-6 h-6 sm:w-7 sm:h-7 text-secondary" />
                   </div>
-                  <h3 className="text-xl font-semibold">{integration.name}</h3>
-                  <p className="text-muted-foreground">{integration.description}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold">{integration.name}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">{integration.description}</p>
                   <div className="flex flex-wrap gap-2">
-                    {integration.systems.map((system, i) => <Badge key={i} variant="outline">
+                    {integration.systems.map((system, i) => (
+                      <Badge key={i} variant="outline" className="text-xs sm:text-sm">
                         {system}
-                      </Badge>)}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Security */}
-      <section id="seguranca" className="section-padding bg-primary text-primary-foreground">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+      <section id="seguranca" className="py-12 sm:py-16 lg:py-24 bg-primary text-primary-foreground">
+        <div className="container-custom px-4">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <Badge variant="secondary" className="mb-4">
               Segurança & Privacidade
             </Badge>
-            <h2 className="mb-4 text-primary-foreground">
+            <h2 className="mb-4 text-2xl sm:text-3xl lg:text-4xl text-primary-foreground">
               Seus dados e de seus pacientes em primeiro lugar
             </h2>
-            <p className="text-xl text-primary-foreground/80">
+            <p className="text-base sm:text-lg lg:text-xl text-primary-foreground/80">
               Segurança de classe hospitalar para proteger informações sensíveis
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {security.map((item, index) => <Card key={index} className="bg-primary-light/50 backdrop-blur-sm border-primary-glow/20">
-                <div className="p-6 space-y-4 text-center text-primary-foreground">
-                  <div className="inline-flex w-14 h-14 rounded-full bg-secondary/20 items-center justify-center">
-                    <item.icon className="w-7 h-7 text-secondary" />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+            {security.map((item, index) => (
+              <Card key={index} className="bg-primary-light/50 backdrop-blur-sm border-primary-glow/20">
+                <div className="p-4 sm:p-6 space-y-3 sm:space-y-4 text-center text-primary-foreground">
+                  <div className="inline-flex w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-secondary/20 items-center justify-center">
+                    <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-secondary" />
                   </div>
-                  <h3 className="text-lg font-semibold">{item.title}</h3>
-                  <p className="text-sm text-primary-foreground/80">
+                  <h3 className="text-sm sm:text-lg font-semibold">{item.title}</h3>
+                  <p className="text-xs sm:text-sm text-primary-foreground/80">
                     {item.description}
                   </p>
                 </div>
-              </Card>)}
+              </Card>
+            ))}
           </div>
 
-          <div className="mt-12 max-w-3xl mx-auto p-6 bg-primary-light/30 rounded-xl border border-primary-glow/20">
-            <p className="text-center text-primary-foreground/90">
+          <div className="mt-8 sm:mt-12 max-w-3xl mx-auto p-4 sm:p-6 bg-primary-light/30 rounded-xl border border-primary-glow/20">
+            <p className="text-center text-xs sm:text-base text-primary-foreground/90">
               <strong>Certificações:</strong> ISO 27001 • SOC 2 Type II • HIPAA
               Compliant • LGPD Adequado
             </p>
@@ -220,18 +242,18 @@ const Produto = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-gradient-subtle">
-        <div className="container-custom">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-subtle">
+        <div className="container-custom px-4">
           <Card className="card-premium bg-gradient-primary text-primary-foreground border-0">
-            <div className="p-12 text-center space-y-8">
-              <h2 className="text-primary-foreground">
+            <div className="p-6 sm:p-8 lg:p-12 text-center space-y-4 sm:space-y-6 lg:space-y-8">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl text-primary-foreground">
                 Pronto para experimentar a MindMed?
               </h2>
-              <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-primary-foreground/80 max-w-2xl mx-auto">
                 Veja na prática como nossa plataforma pode transformar sua rotina
                 médica
               </p>
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow-intense text-lg" asChild>
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow-intense text-base sm:text-lg min-h-[44px]" asChild>
                 <Link to="/contato">
                   Agendar Demonstração Gratuita
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -243,6 +265,8 @@ const Produto = () => {
       </section>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Produto;

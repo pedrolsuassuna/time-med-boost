@@ -20,7 +20,6 @@ const Contato = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Track event
     if (typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "lead_submit", {
         form_type: "contact",
@@ -54,39 +53,42 @@ const Contato = () => {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="text-sm sm:text-base"
+                    className="text-sm sm:text-base min-h-[44px]"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="email">Email *</Label>
+                  <Label htmlFor="email" className="text-sm sm:text-base">Email *</Label>
                   <Input
                     id="email"
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="min-h-[44px]"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="phone">Telefone *</Label>
+                  <Label htmlFor="phone" className="text-sm sm:text-base">Telefone *</Label>
                   <Input
                     id="phone"
                     type="tel"
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="min-h-[44px]"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="crm">CRM (opcional)</Label>
+                  <Label htmlFor="crm" className="text-sm sm:text-base">CRM (opcional)</Label>
                   <Input
                     id="crm"
                     value={formData.crm}
                     onChange={(e) => setFormData({ ...formData, crm: e.target.value })}
+                    className="min-h-[44px]"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="message">Mensagem *</Label>
+                  <Label htmlFor="message" className="text-sm sm:text-base">Mensagem *</Label>
                   <Textarea
                     id="message"
                     required
@@ -95,35 +97,35 @@ const Contato = () => {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   />
                 </div>
-                <Button type="submit" size="lg" className="w-full bg-secondary hover:bg-secondary/90">
+                <Button type="submit" size="lg" className="w-full bg-secondary hover:bg-secondary/90 min-h-[44px]">
                   Enviar Mensagem
                 </Button>
               </form>
 
-              <div className="space-y-8">
-                <div className="flex gap-4">
-                  <Mail className="w-6 h-6 text-secondary" />
+              <div className="space-y-6 sm:space-y-8">
+                <div className="flex gap-3 sm:gap-4">
+                  <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-secondary flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold">Email</p>
-                    <a href="mailto:contato@mindmed.com.br" className="text-muted-foreground hover:text-secondary">
+                    <p className="font-semibold text-sm sm:text-base">Email</p>
+                    <a href="mailto:contato@mindmed.com.br" className="text-sm sm:text-base text-muted-foreground hover:text-secondary break-all">
                       contato@mindmed.com.br
                     </a>
                   </div>
                 </div>
-                <div className="flex gap-4">
-                  <Phone className="w-6 h-6 text-secondary" />
+                <div className="flex gap-3 sm:gap-4">
+                  <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-secondary flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold">Telefone</p>
-                    <a href="tel:+5511999999999" className="text-muted-foreground hover:text-secondary">
+                    <p className="font-semibold text-sm sm:text-base">Telefone</p>
+                    <a href="tel:+5511999999999" className="text-sm sm:text-base text-muted-foreground hover:text-secondary">
                       (11) 99999-9999
                     </a>
                   </div>
                 </div>
-                <div className="flex gap-4">
-                  <MapPin className="w-6 h-6 text-secondary" />
+                <div className="flex gap-3 sm:gap-4">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-secondary flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold">Endereço</p>
-                    <p className="text-muted-foreground">São Paulo, SP - Brasil</p>
+                    <p className="font-semibold text-sm sm:text-base">Endereço</p>
+                    <p className="text-sm sm:text-base text-muted-foreground">São Paulo, SP - Brasil</p>
                   </div>
                 </div>
               </div>
