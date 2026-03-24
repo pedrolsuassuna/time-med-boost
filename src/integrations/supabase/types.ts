@@ -46,6 +46,48 @@ export type Database = {
           },
         ]
       }
+      free_trials: {
+        Row: {
+          activated_at: string
+          converted: boolean | null
+          created_at: string | null
+          email: string
+          expires_at: string
+          id: string
+          notified_day_10: boolean | null
+          notified_day_11: boolean | null
+          notified_day_12: boolean | null
+          notified_day_13: boolean | null
+          notified_day_14: boolean | null
+        }
+        Insert: {
+          activated_at?: string
+          converted?: boolean | null
+          created_at?: string | null
+          email: string
+          expires_at?: string
+          id?: string
+          notified_day_10?: boolean | null
+          notified_day_11?: boolean | null
+          notified_day_12?: boolean | null
+          notified_day_13?: boolean | null
+          notified_day_14?: boolean | null
+        }
+        Update: {
+          activated_at?: string
+          converted?: boolean | null
+          created_at?: string | null
+          email?: string
+          expires_at?: string
+          id?: string
+          notified_day_10?: boolean | null
+          notified_day_11?: boolean | null
+          notified_day_12?: boolean | null
+          notified_day_13?: boolean | null
+          notified_day_14?: boolean | null
+        }
+        Relationships: []
+      }
       plan_subscriptions: {
         Row: {
           cakto_customer_id: string | null
