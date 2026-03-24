@@ -48,6 +48,7 @@ import {
 import { createCheckoutSession, STRIPE_PLANS } from "@/lib/stripe";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { supabase } from "@/integrations/supabase/client";
 
 // Lazy load below-the-fold heavy component
 const FinancialCalculator = lazy(() => import("@/components/FinancialCalculator"));
