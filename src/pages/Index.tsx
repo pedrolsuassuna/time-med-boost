@@ -1,5 +1,7 @@
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -46,6 +48,7 @@ import {
 import { createCheckoutSession, STRIPE_PLANS } from "@/lib/stripe";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { supabase } from "@/integrations/supabase/client";
 
 // Lazy load below-the-fold heavy component
 const FinancialCalculator = lazy(() => import("@/components/FinancialCalculator"));
@@ -58,6 +61,9 @@ const CalculatorSkeleton = () => (
 
 const Index = () => {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [trialDialogOpen, setTrialDialogOpen] = useState(false);
+  const [trialEmail, setTrialEmail] = useState("");
+  const [trialLoading, setTrialLoading] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     hours: 23,
     minutes: 59,
@@ -979,6 +985,82 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Hidden Trial Button */}
+      <div className="py-4 text-center">
+        <button
+          onClick={() => setTrialDialogOpen(true)}
+          className="text-xs text-muted-foreground/40 hover:text-muted-foreground/60 transition-colors cursor-pointer bg-transparent border-none underline-offset-2 hover:underline"
+        >
+          Testar gratuitamente por 15 dias
+        </button>
+      </div>
+
+      <Dialog open={trialDialogOpen} onOpenChange={setTrialDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold">🎁 Teste Grátis de 15 Dias</DialogTitle>
+            <DialogDescription>
+              Experimente todos os recursos do Plano PRO por 15 dias, sem compromisso e sem cartão de crédito.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 pt-2">
+            <div className="space-y-2">
+              <label htmlFor="trial-email" className="text-sm font-medium">
+                Seu melhor e-mail
+              </label>
+              <Input
+                id="trial-email"
+                type="email"
+                placeholder="seu@email.com"
+                value={trialEmail}
+                onChange={(e) => setTrialEmail(e.target.value)}
+                disabled={trialLoading}
+              />
+            </div>
+            <Button
+              className="w-full"
+              variant="cta"
+              disabled={trialLoading || !trialEmail.includes("@")}
+              onClick={async () => {
+                setTrialLoading(true);
+                try {
+                  const { data, error } = await supabase.functions.invoke("activate-free-trial", {
+                    body: { email: trialEmail.trim().toLowerCase() },
+                  });
+                  if (error) throw error;
+                  if (data?.success) {
+                    toast.success(data.message);
+                    setTrialDialogOpen(false);
+                    setTrialEmail("");
+                    setTimeout(() => {
+                      window.location.href = "https://acesso.mindmed.online";
+                    }, 1500);
+                  } else if (data?.expired) {
+                    toast.error(data.message);
+                  } else {
+                    toast.error(data?.error || "Erro ao ativar teste gratuito");
+                  }
+                } catch (err) {
+                  console.error(err);
+                  toast.error("Erro ao ativar teste gratuito. Tente novamente.");
+                } finally {
+                  setTrialLoading(false);
+                }
+              }}
+            >
+              {trialLoading ? (
+                <><Loader2 className="w-4 h-4 animate-spin" /> Ativando...</>
+              ) : (
+                "Ativar Teste Grátis"
+              )}
+            </Button>
+            <p className="text-xs text-muted-foreground text-center">
+              Sem cartão de crédito • Acesso PRO completo • 15 dias
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>
