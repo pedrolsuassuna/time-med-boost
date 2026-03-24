@@ -61,6 +61,9 @@ const CalculatorSkeleton = () => (
 
 const Index = () => {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [trialDialogOpen, setTrialDialogOpen] = useState(false);
+  const [trialEmail, setTrialEmail] = useState("");
+  const [trialLoading, setTrialLoading] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     hours: 23,
     minutes: 59,
